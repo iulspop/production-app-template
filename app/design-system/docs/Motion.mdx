@@ -1,0 +1,257 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design System/Motion" />
+
+# Motion System
+
+Duration, easing, and transition patterns. Motion reinforces meaning — every animation communicates something.
+
+---
+
+## Duration Scale
+
+Seven duration tokens from instant to ambient. Use token names, not raw milliseconds.
+
+export const DurationRow = ({ token, value, ms, use }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "6px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <span style={{ fontFamily: "monospace", fontSize: 13, color: "#57524D", minWidth: 130 }}>{token}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 50 }}>{value}</span>
+    <div style={{ minWidth: 300, display: "flex", alignItems: "center" }}>
+      {ms > 0 ? (
+        <div style={{ width: ms * 0.3, height: 12, background: "#ABA6A0", borderRadius: 2, minWidth: 2 }} />
+      ) : (
+        <span style={{ fontSize: 12, color: "#ABA6A0" }}>—</span>
+      )}
+    </div>
+    <span style={{ fontSize: 12, color: "#ABA6A0", flex: 1 }}>{use}</span>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 32 }}>
+  <div style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "2px solid #DBD6CD" }}>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 130 }}>Token</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 50 }}>Value</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 300 }}>Visual</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", flex: 1 }}>Use</span>
+  </div>
+  <DurationRow token="duration-instant" value="0ms" ms={0} use="Immediate state (no animation)" />
+  <DurationRow token="duration-fast" value="100ms" ms={100} use="Micro-interactions, toggles, icon swaps" />
+  <DurationRow token="duration-normal" value="200ms" ms={200} use="Buttons, fades, small moves" />
+  <DurationRow token="duration-moderate" value="300ms" ms={300} use="Panels, cards, medium elements" />
+  <DurationRow token="duration-slow" value="400ms" ms={400} use="Page transitions, large reveals" />
+  <DurationRow token="duration-slower" value="600ms" ms={600} use="Emphasis, celebrations" />
+  <DurationRow token="duration-slowest" value="1000ms" ms={1000} use="Background ambient, breathing" />
+</div>
+
+---
+
+## Easing Curves
+
+Four curves for different motion intents. Each defined as a cubic-bezier function.
+
+export const EasingCard = ({ name, value, description }) => (
+  <div style={{ flex: 1, padding: 16, border: "1px solid #DBD6CD", borderRadius: 8 }}>
+    <div style={{ fontSize: 14, fontWeight: 600, color: "#80611A", marginBottom: 2 }}>{name}</div>
+    <div style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0", marginBottom: 12 }}>{value}</div>
+    <svg width="100%" height="80" viewBox="0 0 200 80" style={{ display: "block" }}>
+      <rect x="0" y="0" width="200" height="80" fill="#F8F5EE" rx="4" />
+      <line x1="20" y1="60" x2="180" y2="60" stroke="#DBD6CD" strokeWidth="1" />
+      <line x1="20" y1="20" x2="20" y2="60" stroke="#DBD6CD" strokeWidth="1" />
+      {name === "ease-out" && (
+        <path d="M 20 60 C 52 20, 80 20, 180 20" fill="none" stroke="#ABA6A0" strokeWidth="2" />
+      )}
+      {name === "ease-in" && (
+        <path d="M 20 60 C 120 60, 148 20, 180 20" fill="none" stroke="#ABA6A0" strokeWidth="2" />
+      )}
+      {name === "ease-in-out" && (
+        <path d="M 20 60 C 150 60, 50 20, 180 20" fill="none" stroke="#ABA6A0" strokeWidth="2" />
+      )}
+      {name === "ease-spring" && (
+        <path d="M 20 60 C 88 -10, 148 20, 180 20" fill="none" stroke="#ABA6A0" strokeWidth="2" />
+      )}
+    </svg>
+    <div style={{ fontSize: 11, color: "#ABA6A0", marginTop: 8 }}>{description}</div>
+  </div>
+);
+
+<div style={{ display: "flex", gap: 16, marginTop: 16, marginBottom: 32 }}>
+  <EasingCard name="ease-out" value="cubic-bezier(0.16, 1, 0.3, 1)" description="Enter / appear — fast start, gentle land" />
+  <EasingCard name="ease-in" value="cubic-bezier(0.55, 0, 1, 0.45)" description="Exit / dismiss — gentle start, fast out" />
+  <EasingCard name="ease-in-out" value="cubic-bezier(0.65, 0, 0.35, 1)" description="Move / reposition — smooth both ends" />
+  <EasingCard name="ease-spring" value="cubic-bezier(0.34, 1.56, 0.64, 1)" description="Emphasis / delight — slight overshoot" />
+</div>
+
+---
+
+## Semantic Motion Tokens
+
+Named bundles of duration + easing for specific motion intents. Use these tokens in code.
+
+export const MotionTokenRow = ({ token, duration, easing, example }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <span style={{ fontFamily: "monospace", fontSize: 13, fontWeight: 600, color: "#80611A", minWidth: 140 }}>{token}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 60 }}>{duration}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 90 }}>{easing}</span>
+    <span style={{ fontSize: 12, color: "#ABA6A0", flex: 1 }}>{example}</span>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 32 }}>
+  <div style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "2px solid #DBD6CD" }}>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 140 }}>Token</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 60 }}>Duration</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 90 }}>Easing</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", flex: 1 }}>Example</span>
+  </div>
+  <MotionTokenRow token="motion.enter" duration="300ms" easing="ease-out" example="Session panel slides in" />
+  <MotionTokenRow token="motion.exit" duration="200ms" easing="ease-in" example="Dialog fades out" />
+  <MotionTokenRow token="motion.move" duration="200ms" easing="ease-in-out" example="Card reposition, list reorder" />
+  <MotionTokenRow token="motion.fade" duration="200ms" easing="ease-out" example="Content crossfade" />
+  <MotionTokenRow token="motion.expand" duration="300ms" easing="ease-out" example="Accordion open, detail reveal" />
+  <MotionTokenRow token="motion.collapse" duration="200ms" easing="ease-in" example="Accordion close" />
+  <MotionTokenRow token="motion.emphasis" duration="400ms" easing="ease-spring" example="Celebration, success state" />
+  <MotionTokenRow token="motion.ambient" duration="1000ms" easing="ease-in-out" example="Background pulse, breathing" />
+</div>
+
+---
+
+## Transition Patterns
+
+How motion applies to common UI patterns. Each strip shows keyframe progression.
+
+export const TransitionStrip = ({ title, subtitle, tokens, steps }) => (
+  <div style={{ marginBottom: 32 }}>
+    <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 4 }}>
+      <span style={{ fontSize: 14, fontWeight: 600, color: "#1A1716" }}>{title}</span>
+      <span style={{ fontFamily: "monospace", fontSize: 11, color: "#80611A" }}>{tokens}</span>
+    </div>
+    <div style={{ fontSize: 12, color: "#ABA6A0", marginBottom: 12 }}>{subtitle}</div>
+    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      {steps.map((step, i) => (
+        <div key={i} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {i > 0 && <span style={{ color: "#ABA6A0", fontSize: 16 }}>⟶</span>}
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+            <div style={{
+              width: step.width || 80,
+              height: step.height || 56,
+              background: step.bg || "#F0E2C2",
+              borderRadius: 8,
+              opacity: step.opacity ?? 1,
+              transform: step.transform || "none",
+              border: "1px solid #DBD6CD",
+            }} />
+            <span style={{ fontSize: 10, color: "#ABA6A0" }}>{step.label}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+<TransitionStrip
+  title="Page Transitions"
+  subtitle="Slide + fade between routes"
+  tokens="duration-slow · ease-out"
+  steps={[
+    { label: "Current page", opacity: 0.5 },
+    { label: "Slide + fade" },
+    { label: "New page" },
+  ]}
+/>
+
+<TransitionStrip
+  title="Card Draws"
+  subtitle="Card enters from bottom, settles into position"
+  tokens="duration-moderate · ease-out"
+  steps={[
+    { label: "Off-screen", opacity: 0.3, height: 40 },
+    { label: "Rising", height: 48 },
+    { label: "Settled", height: 56 },
+  ]}
+/>
+
+<TransitionStrip
+  title="Session Enter / Exit"
+  subtitle="Panel scales up from card, fades on exit"
+  tokens="duration-moderate · ease-out / ease-in"
+  steps={[
+    { label: "Card", width: 48, height: 36 },
+    { label: "Scaling", width: 64, height: 48 },
+    { label: "Full panel", width: 96, height: 56 },
+  ]}
+/>
+
+<TransitionStrip
+  title="Progress Steps"
+  subtitle="Dot fills + slide to next step"
+  tokens="duration-normal · ease-in-out"
+  steps={[
+    { label: "Step 1 active", width: 60, height: 20, bg: "#DBD6CD" },
+    { label: "Transition", width: 60, height: 20, bg: "#D2A852" },
+    { label: "Step 2 active", width: 60, height: 20, bg: "#DBD6CD" },
+  ]}
+/>
+
+<TransitionStrip
+  title="Micro-interactions"
+  subtitle="Button press, toggle, icon swap"
+  tokens="duration-fast · ease-out"
+  steps={[
+    { label: "Default", width: 72, height: 32, bg: "#EDE9E0" },
+    { label: "Pressed", width: 72, height: 32, bg: "#D2A852" },
+    { label: "Active", width: 72, height: 32, bg: "#80611A" },
+  ]}
+/>
+
+---
+
+## Motion Principles
+
+Rules for applying motion consistently across the product.
+
+export const Principle = ({ number, title, description }) => (
+  <div style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "12px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#1A1716", color: "#F8F5EE", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 600, flexShrink: 0 }}>{number}</div>
+    <div>
+      <div style={{ fontSize: 14, fontWeight: 600, color: "#1A1716" }}>{title}</div>
+      <div style={{ fontSize: 13, color: "#ABA6A0", marginTop: 2 }}>{description}</div>
+    </div>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 32 }}>
+  <Principle number="1" title="Purposeful" description="Every animation communicates something; never animate for decoration." />
+  <Principle number="2" title="Quick by default" description="Use duration-normal (200ms) unless there's a reason to go slower." />
+  <Principle number="3" title="Match direction" description="Elements enter from where they came, exit toward where they're going." />
+  <Principle number="4" title="Reduce on request" description="Respect prefers-reduced-motion; provide instant fallback for all tokens." />
+  <Principle number="5" title="Path metaphor" description="Forward navigation slides left, backward slides right — reinforcing the journey." />
+</div>
+
+---
+
+## Usage
+
+```ts
+import { style } from "@vanilla-extract/css";
+import { motion } from "~/design-system/tokens/motion.css";
+
+export const panel = style({
+  transition: `transform ${motion.enter.duration} ${motion.enter.easing},
+               opacity ${motion.enter.duration} ${motion.enter.easing}`,
+});
+
+export const dialog = style({
+  transition: `opacity ${motion.fade.duration} ${motion.fade.easing}`,
+});
+
+// Reduced motion fallback
+export const reducedMotion = style({
+  "@media": {
+    "(prefers-reduced-motion: reduce)": {
+      transition: "none",
+    },
+  },
+});
+```
+
+Motion tokens bundle duration + easing so code stays declarative. Always respect `prefers-reduced-motion`.

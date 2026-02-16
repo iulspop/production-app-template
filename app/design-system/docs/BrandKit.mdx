@@ -1,0 +1,364 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import {
+  Brain, Lightbulb, Eye, ChatCircle, Path, Compass, Target, Spiral,
+  Fire, Drop, Tree, Mountains, Diamond,
+  Play, Check, ArrowRight, CaretRight, Timer, Calendar, Heart, Star, Sparkle,
+  House, Notebook, Gear, User,
+} from "@phosphor-icons/react";
+
+<Meta title="Design System/Brand Kit" />
+
+{/* ─── Brand Header ─── */}
+
+<div style={{ background: "#1A1716", borderRadius: 16, padding: "48px 40px", marginBottom: 40 }}>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 8 }}>Design System</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 48, fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#F8F5EE", marginBottom: 12 }}>Grounded Light</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.6, color: "#ABA6A0", maxWidth: 480 }}>
+    Warm neutrals, purposeful motion, and quiet confidence. Every token below is pulled from the design system — colors, type, spacing, icons, and motion working together.
+  </div>
+</div>
+
+{/* ─── Palette Overview ─── */}
+
+export const PaletteStrip = ({ name, colors }) => (
+  <div style={{ display: "flex", flexDirection: "column", gap: 4, flex: 1 }}>
+    <div style={{ display: "flex", borderRadius: 8, overflow: "hidden", height: 48 }}>
+      {colors.map((c, i) => (
+        <div key={i} style={{ flex: 1, background: c }} />
+      ))}
+    </div>
+    <span style={{ fontSize: 11, fontWeight: 500, color: "#80611A", letterSpacing: "0.05em", textTransform: "uppercase" }}>{name}</span>
+  </div>
+);
+
+<div style={{ marginBottom: 40 }}>
+  <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Palette at a glance</div>
+  <div style={{ display: "flex", gap: 12 }}>
+    <PaletteStrip name="Neutral" colors={["#F8F5EE", "#EDE9E0", "#DBD6CD", "#ABA6A0", "#8C8580", "#57524D", "#38352F", "#1A1716"]} />
+    <PaletteStrip name="Warm" colors={["#F2D5CF", "#D2614D", "#941A10", "#F28566"]} />
+    <PaletteStrip name="Cool" colors={["#CDDCED", "#5285B3", "#1F5280", "#80B8EB"]} />
+    <PaletteStrip name="Earth" colors={["#F0E2C2", "#D2A852", "#80611A", "#F2C761"]} />
+    <PaletteStrip name="Natural" colors={["#D0E5D4", "#6BA37A", "#2E6638", "#8DD199"]} />
+    <PaletteStrip name="Muted" colors={["#E0DEE3", "#99949E", "#524D57", "#C7C2CC"]} />
+  </div>
+</div>
+
+---
+
+{/* ─── Typography Specimen ─── */}
+
+<div style={{ marginBottom: 40 }}>
+  <div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 16 }}>Type specimen</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 40, fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#1A1716", marginBottom: 8 }}>Your inner world, illuminated</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 28, fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#57524D", marginBottom: 12 }}>Thinking Tools for Everyday Growth</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 300, lineHeight: 1.4, color: "#8C8580", marginBottom: 16 }}>Session Overview — fear of conflict in relationships</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: 1.6, color: "#57524D", maxWidth: 520, marginBottom: 12 }}>
+    The quiet room at dusk. A space for reflection, stillness, and the slow work of understanding yourself. Each session builds on the last, creating a path through your inner landscape.
+  </div>
+  <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+    <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 400, letterSpacing: "0.05em", color: "#ABA6A0" }}>3 of 8 sessions · tomorrow · 2 min read</span>
+    <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "#80611A" }}>Start Session</span>
+  </div>
+</div>
+
+---
+
+{/* ─── Light Mode UI Cards ─── */}
+
+<div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Light mode</div>
+
+<div style={{ display: "flex", gap: 20, marginBottom: 40 }}>
+  {/* Triggers List Card */}
+  <div style={{ flex: 1, background: "#FFFFFF", border: "1px solid #DBD6CD", borderRadius: 8, padding: 20, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 300, color: "#1A1716" }}>My Triggers</div>
+      <span style={{ fontSize: 12, color: "#ABA6A0" }}>4 items</span>
+    </div>
+    {[
+      { icon: Fire, color: "#941A10", bg: "#F2D5CF", label: "Criticism at work", meta: "High · 6 sessions" },
+      { icon: Drop, color: "#1F5280", bg: "#CDDCED", label: "Feeling unheard", meta: "Medium · 3 sessions" },
+      { icon: Mountains, color: "#524D57", bg: "#E0DEE3", label: "Financial uncertainty", meta: "High · 4 sessions" },
+      { icon: Tree, color: "#2E6638", bg: "#D0E5D4", label: "Family boundaries", meta: "Low · 2 sessions" },
+    ].map(({ icon: Icon, color, bg, label, meta }) => (
+      <div key={label} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 0", borderBottom: "1px solid #EDE9E0" }}>
+        <div style={{ width: 32, height: 32, borderRadius: 8, background: bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Icon size={16} weight="regular" color={color} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, color: "#1A1716" }}>{label}</div>
+          <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, letterSpacing: "0.05em", color: "#ABA6A0" }}>{meta}</div>
+        </div>
+        <CaretRight size={16} weight="light" color="#ABA6A0" />
+      </div>
+    ))}
+  </div>
+
+  {/* Session Guide Card */}
+  <div style={{ flex: 1, background: "#FFFFFF", border: "1px solid #DBD6CD", borderRadius: 8, padding: 20, boxShadow: "0 1px 3px rgba(0,0,0,0.08)" }}>
+    <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 4 }}>
+      <Compass size={20} weight="light" color="#80611A" />
+      <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#80611A", textTransform: "uppercase" }}>Active Session</span>
+    </div>
+    <div style={{ fontFamily: "Inter, sans-serif", fontSize: 28, fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#1A1716", marginBottom: 8 }}>Fear of Conflict</div>
+    <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: 1.6, color: "#57524D", marginBottom: 20 }}>
+      Explore your relationship with disagreement. Notice the physical sensations, the stories you tell yourself, and the patterns that emerge.
+    </div>
+
+    {/* Progress Steps */}
+    <div style={{ display: "flex", gap: 8, marginBottom: 20 }}>
+      {["Reflect", "Identify", "Reframe", "Practice"].map((step, i) => (
+        <div key={step} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+          <div style={{
+            width: 24, height: 24, borderRadius: "50%",
+            background: i < 2 ? "#80611A" : i === 2 ? "#F0E2C2" : "#EDE9E0",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            {i < 2 ? <Check size={12} weight="bold" color="#F8F5EE" /> : <span style={{ fontSize: 11, color: i === 2 ? "#80611A" : "#ABA6A0" }}>{i + 1}</span>}
+          </div>
+          <span style={{ fontSize: 10, color: i <= 2 ? "#80611A" : "#ABA6A0" }}>{step}</span>
+        </div>
+      ))}
+    </div>
+
+    <div style={{ display: "flex", gap: 8 }}>
+      <div style={{ flex: 1, background: "#80611A", borderRadius: 8, padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+        <Play size={16} weight="fill" color="#F8F5EE" />
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "#F8F5EE" }}>Continue</span>
+      </div>
+      <div style={{ width: 40, height: 40, borderRadius: 8, border: "1px solid #DBD6CD", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Timer size={20} weight="light" color="#57524D" />
+      </div>
+    </div>
+  </div>
+</div>
+
+---
+
+{/* ─── Shell → Session Transition ─── */}
+
+<div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Shell → Session transition</div>
+
+<div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 40 }}>
+  {/* Shell */}
+  <div style={{ width: 120, background: "#F8F5EE", border: "1px solid #DBD6CD", borderRadius: 8, padding: 12 }}>
+    <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
+      <House size={16} weight="light" color="#57524D" />
+      <User size={16} weight="light" color="#57524D" />
+    </div>
+    <div style={{ height: 6, background: "#EDE9E0", borderRadius: 3, marginBottom: 4 }} />
+    <div style={{ height: 6, background: "#EDE9E0", borderRadius: 3, width: "60%" }} />
+    <div style={{ fontSize: 9, color: "#ABA6A0", marginTop: 8, textAlign: "center" }}>Shell (light)</div>
+  </div>
+
+  {/* Arrow with motion token */}
+  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+    <ArrowRight size={20} weight="light" color="#ABA6A0" />
+    <span style={{ fontFamily: "monospace", fontSize: 9, color: "#80611A" }}>300ms ease-out</span>
+  </div>
+
+  {/* Transition mid */}
+  <div style={{ width: 140, background: "linear-gradient(135deg, #F8F5EE 0%, #FFFFFF 100%)", border: "1px solid #DBD6CD", borderRadius: 12, padding: 16, boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 8 }}>
+      <Compass size={14} weight="regular" color="#80611A" />
+      <div style={{ height: 5, flex: 1, background: "#D2A852", borderRadius: 3 }} />
+    </div>
+    <div style={{ height: 5, background: "#EDE9E0", borderRadius: 3, marginBottom: 3 }} />
+    <div style={{ height: 5, background: "#EDE9E0", borderRadius: 3, width: "80%" }} />
+    <div style={{ fontSize: 9, color: "#ABA6A0", marginTop: 8, textAlign: "center" }}>Scaling up</div>
+  </div>
+
+  {/* Arrow */}
+  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}>
+    <ArrowRight size={20} weight="light" color="#ABA6A0" />
+    <span style={{ fontFamily: "monospace", fontSize: 9, color: "#80611A" }}>ease-out</span>
+  </div>
+
+  {/* Session */}
+  <div style={{ flex: 1, background: "#FFFFFF", border: "1px solid #DBD6CD", borderRadius: 16, padding: 20, boxShadow: "0 4px 12px rgba(0,0,0,0.12)" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+      <Compass size={20} weight="regular" color="#80611A" />
+      <span style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 300, color: "#1A1716" }}>Fear of Conflict</span>
+    </div>
+    <div style={{ height: 6, background: "#EDE9E0", borderRadius: 3, marginBottom: 4 }} />
+    <div style={{ height: 6, background: "#EDE9E0", borderRadius: 3, marginBottom: 4, width: "90%" }} />
+    <div style={{ height: 6, background: "#EDE9E0", borderRadius: 3, width: "70%" }} />
+    <div style={{ fontSize: 9, color: "#ABA6A0", marginTop: 8, textAlign: "center" }}>Session (elevated)</div>
+  </div>
+</div>
+
+---
+
+{/* ─── Element Accents ─── */}
+
+<div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Accent elements</div>
+
+<div style={{ display: "flex", gap: 12, marginBottom: 40 }}>
+  {[
+    { icon: Fire, name: "Fire", text: "#941A10", tint: "#D2614D", subtle: "#F2D5CF", desc: "Anger, passion, urgency" },
+    { icon: Drop, name: "Water", text: "#1F5280", tint: "#5285B3", subtle: "#CDDCED", desc: "Sadness, calm, depth" },
+    { icon: Diamond, name: "Metal", text: "#524D57", tint: "#99949E", subtle: "#E0DEE3", desc: "Grief, structure, clarity" },
+    { icon: Tree, name: "Wood", text: "#2E6638", tint: "#6BA37A", subtle: "#D0E5D4", desc: "Growth, kindness, flexibility" },
+    { icon: Mountains, name: "Earth", text: "#80611A", tint: "#D2A852", subtle: "#F0E2C2", desc: "Stability, care, grounding" },
+  ].map(({ icon: Icon, name, text, tint, subtle, desc }) => (
+    <div key={name} style={{ flex: 1, borderRadius: 12, overflow: "hidden", border: `1px solid ${subtle}` }}>
+      <div style={{ background: subtle, padding: "20px 16px", display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+        <Icon size={32} weight="regular" color={text} />
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: text }}>{name}</div>
+      </div>
+      <div style={{ padding: "12px 16px", background: "#FFFFFF" }}>
+        <div style={{ fontSize: 12, color: "#57524D", lineHeight: 1.4, textAlign: "center" }}>{desc}</div>
+        <div style={{ display: "flex", gap: 4, justifyContent: "center", marginTop: 8 }}>
+          <div style={{ width: 24, height: 12, borderRadius: 3, background: subtle }} />
+          <div style={{ width: 24, height: 12, borderRadius: 3, background: tint }} />
+          <div style={{ width: 24, height: 12, borderRadius: 3, background: text }} />
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+---
+
+{/* ─── Dark Mode ─── */}
+
+<div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Dark mode</div>
+
+<div style={{ background: "#0D0C0A", borderRadius: 16, padding: 32, marginBottom: 40 }}>
+  <div style={{ display: "flex", gap: 20 }}>
+    {/* Dark Triggers Card */}
+    <div style={{ flex: 1, background: "#1A1716", border: "1px solid #38352F", borderRadius: 8, padding: 20 }}>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 300, color: "#F8F5EE", marginBottom: 16 }}>My Triggers</div>
+      {[
+        { icon: Fire, color: "#F28566", bg: "#941A10", label: "Criticism at work" },
+        { icon: Drop, color: "#80B8EB", bg: "#1F5280", label: "Feeling unheard" },
+        { icon: Mountains, color: "#C7C2CC", bg: "#524D57", label: "Financial uncertainty" },
+      ].map(({ icon: Icon, color, bg, label }) => (
+        <div key={label} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 0", borderBottom: "1px solid #38352F" }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Icon size={16} weight="regular" color={color} />
+          </div>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: "#DBD6CD" }}>{label}</span>
+          <CaretRight size={16} weight="light" color="#57524D" style={{ marginLeft: "auto" }} />
+        </div>
+      ))}
+    </div>
+
+    {/* Dark Session Card */}
+    <div style={{ flex: 1, background: "#1A1716", border: "1px solid #38352F", borderRadius: 8, padding: 20 }}>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 4 }}>
+        <Compass size={20} weight="light" color="#F2C761" />
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#F2C761", textTransform: "uppercase" }}>Active Session</span>
+      </div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 28, fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#F8F5EE", marginBottom: 8 }}>Fear of Conflict</div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 400, lineHeight: 1.6, color: "#ABA6A0", marginBottom: 20 }}>
+        Explore your relationship with disagreement. Notice the patterns that emerge.
+      </div>
+      <div style={{ background: "#F2C761", borderRadius: 8, padding: "10px 16px", display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+        <Play size={16} weight="fill" color="#1A1716" />
+        <span style={{ fontFamily: "Inter, sans-serif", fontSize: 15, fontWeight: 500, color: "#1A1716" }}>Continue</span>
+      </div>
+    </div>
+  </div>
+
+  {/* Dark Element Accents */}
+  <div style={{ display: "flex", gap: 8, marginTop: 20 }}>
+    {[
+      { icon: Fire, color: "#F28566", bg: "#941A10" },
+      { icon: Drop, color: "#80B8EB", bg: "#1F5280" },
+      { icon: Diamond, color: "#C7C2CC", bg: "#524D57" },
+      { icon: Tree, color: "#8DD199", bg: "#2E6638" },
+      { icon: Mountains, color: "#F2C761", bg: "#80611A" },
+    ].map(({ icon: Icon, color, bg }, i) => (
+      <div key={i} style={{ flex: 1, height: 48, borderRadius: 8, background: bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Icon size={24} weight="regular" color={color} />
+      </div>
+    ))}
+  </div>
+</div>
+
+---
+
+{/* ─── Spacing & Elevation Demo ─── */}
+
+<div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Spacing & elevation in context</div>
+
+<div style={{ display: "flex", gap: 20, marginBottom: 40 }}>
+  <div style={{ flex: 1 }}>
+    <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+      {[
+        { label: "elevation-0", shadow: "none" },
+        { label: "elevation-1", shadow: "0 1px 3px rgba(0,0,0,0.08)" },
+        { label: "elevation-2", shadow: "0 4px 12px rgba(0,0,0,0.12)" },
+      ].map(({ label, shadow }) => (
+        <div key={label} style={{ flex: 1, background: "#FFFFFF", borderRadius: 8, padding: 16, boxShadow: shadow, border: shadow === "none" ? "1px solid #EDE9E0" : "none", textAlign: "center" }}>
+          <div style={{ fontFamily: "monospace", fontSize: 11, color: "#80611A", marginBottom: 4 }}>{label}</div>
+          <div style={{ fontSize: 12, color: "#ABA6A0" }}>{shadow === "none" ? "Flat" : shadow.includes("1px") ? "Resting" : "Lifted"}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ display: "flex", gap: 8 }}>
+      {[
+        { label: "radius-sm", r: 4 },
+        { label: "radius-md", r: 8 },
+        { label: "radius-lg", r: 16 },
+        { label: "radius-xl", r: 24 },
+      ].map(({ label, r }) => (
+        <div key={label} style={{ flex: 1, height: 48, background: "#F0E2C2", borderRadius: r, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <span style={{ fontFamily: "monospace", fontSize: 10, color: "#80611A" }}>{r}px</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  {/* Icon Weight Progression */}
+  <div style={{ width: 200, background: "#F8F5EE", borderRadius: 8, padding: 16 }}>
+    <div style={{ fontFamily: "monospace", fontSize: 11, color: "#80611A", marginBottom: 8 }}>icon weight</div>
+    {[
+      { w: "light", label: "Shell" },
+      { w: "regular", label: "Session" },
+      { w: "bold", label: "Emphasis" },
+      { w: "fill", label: "Selected" },
+    ].map(({ w, label }) => (
+      <div key={w} style={{ display: "flex", alignItems: "center", gap: 8, padding: "6px 0" }}>
+        <Brain size={20} weight={w} color="#1A1716" />
+        <span style={{ fontSize: 12, color: "#57524D" }}>{label}</span>
+        <span style={{ fontSize: 10, color: "#ABA6A0", marginLeft: "auto" }}>{w}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+---
+
+{/* ─── Motion Preview ─── */}
+
+<div style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.05em", color: "#ABA6A0", textTransform: "uppercase", marginBottom: 12 }}>Motion curves</div>
+
+<div style={{ display: "flex", gap: 12, marginBottom: 40 }}>
+  {[
+    { name: "ease-out", value: "Enter / appear", d: "M 20 60 C 52 20, 80 20, 180 20" },
+    { name: "ease-in", value: "Exit / dismiss", d: "M 20 60 C 120 60, 148 20, 180 20" },
+    { name: "ease-in-out", value: "Move / reposition", d: "M 20 60 C 150 60, 50 20, 180 20" },
+    { name: "ease-spring", value: "Emphasis / delight", d: "M 20 60 C 88 -10, 148 20, 180 20" },
+  ].map(({ name, value, d }) => (
+    <div key={name} style={{ flex: 1, padding: 16, background: "#F8F5EE", borderRadius: 8 }}>
+      <svg width="100%" height="60" viewBox="0 0 200 80" style={{ display: "block" }}>
+        <path d={d} fill="none" stroke="#80611A" strokeWidth="2" />
+      </svg>
+      <div style={{ fontSize: 12, fontWeight: 600, color: "#1A1716", marginTop: 8 }}>{name}</div>
+      <div style={{ fontSize: 11, color: "#ABA6A0" }}>{value}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+{/* ─── Principle Footer ─── */}
+
+<div style={{ background: "#F8F5EE", borderRadius: 12, padding: "24px 32px", display: "flex", alignItems: "center", gap: 24, marginBottom: 16 }}>
+  <Sparkle size={32} weight="light" color="#80611A" />
+  <div>
+    <div style={{ fontFamily: "Inter, sans-serif", fontSize: 18, fontWeight: 300, color: "#1A1716", marginBottom: 4 }}>Stillness comes from space and proportion, not from fading things out.</div>
+    <div style={{ fontFamily: "Inter, sans-serif", fontSize: 12, letterSpacing: "0.05em", color: "#ABA6A0" }}>DESIGN PRINCIPLE — GROUNDED LIGHT</div>
+  </div>
+</div>

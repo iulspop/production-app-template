@@ -1,0 +1,177 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design System/Typography" />
+
+# Typography System
+
+Type primitives → type styles → usage. Code uses style names, never raw values.
+
+---
+
+## Type Primitives
+
+The raw building blocks. Each primitive is a single value with a token name.
+
+### Font Families
+
+<div style={{ display: "flex", gap: 40, marginTop: 16, marginBottom: 32 }}>
+  <div style={{ flex: 1, padding: 20, border: "1px solid #DBD6CD", borderRadius: 8 }}>
+    <div style={{ fontSize: 11, fontWeight: 500, color: "#80611A", letterSpacing: "0.05em", marginBottom: 4 }}>family-primary</div>
+    <div style={{ fontSize: 32, fontFamily: "Inter, sans-serif", fontWeight: 300, color: "#1A1716", marginBottom: 8 }}>Inter</div>
+    <div style={{ fontSize: 13, color: "#ABA6A0" }}>Humanist sans — clean, warm, excellent readability. Swap to Plus Jakarta Sans or Source Sans 3 for more warmth.</div>
+  </div>
+  <div style={{ flex: 1, padding: 20, border: "1px solid #DBD6CD", borderRadius: 8 }}>
+    <div style={{ fontSize: 11, fontWeight: 500, color: "#80611A", letterSpacing: "0.05em", marginBottom: 4 }}>family-accent</div>
+    <div style={{ fontSize: 32, fontFamily: "Inter, serif", fontWeight: 300, color: "#80611A", marginBottom: 8 }}>Inter</div>
+    <div style={{ fontSize: 13, color: "#ABA6A0" }}>Same family for now. Consider a serif (Lora, Source Serif) for quotes and reflective moments.</div>
+  </div>
+</div>
+
+### Size Scale
+
+export const SizeRow = ({ token, size }) => (
+  <div style={{ display: "flex", alignItems: "baseline", gap: 16, padding: "8px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <span style={{ fontFamily: "monospace", fontSize: 13, color: "#57524D", minWidth: 80 }}>{token}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 40 }}>{size}px</span>
+    <span style={{ fontFamily: "Inter, sans-serif", fontSize: size, color: "#1A1716", lineHeight: 1.3 }}>The quiet room at dusk</span>
+  </div>
+);
+
+<div style={{ marginTop: 8, marginBottom: 32 }}>
+  <SizeRow token="size-xs" size={12} />
+  <SizeRow token="size-sm" size={14} />
+  <SizeRow token="size-base" size={16} />
+  <SizeRow token="size-lg" size={18} />
+  <SizeRow token="size-xl" size={20} />
+  <SizeRow token="size-2xl" size={24} />
+  <SizeRow token="size-3xl" size={32} />
+  <SizeRow token="size-4xl" size={40} />
+</div>
+
+### Weight Scale
+
+<div style={{ display: "flex", gap: 32, marginTop: 8, marginBottom: 32 }}>
+  {[
+    { token: "weight-light", weight: 300 },
+    { token: "weight-regular", weight: 400 },
+    { token: "weight-medium", weight: 500 },
+    { token: "weight-semibold", weight: 600 },
+  ].map(({ token, weight }) => (
+    <div key={token}>
+      <div style={{ display: "flex", gap: 12, alignItems: "baseline", marginBottom: 4 }}>
+        <span style={{ fontFamily: "monospace", fontSize: 11, color: "#80611A" }}>{token}</span>
+        <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{weight}</span>
+      </div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 20, fontWeight: weight, color: "#1A1716" }}>The quiet room</div>
+    </div>
+  ))}
+</div>
+
+### Line Height Scale
+
+<div style={{ display: "flex", gap: 32, marginTop: 8, marginBottom: 32 }}>
+  {[
+    { token: "leading-tight", value: 1.2, label: "1.2 (120%)" },
+    { token: "leading-normal", value: 1.4, label: "1.4 (140%)" },
+    { token: "leading-relaxed", value: 1.6, label: "1.6 (160%)" },
+  ].map(({ token, value, label }) => (
+    <div key={token} style={{ flex: 1 }}>
+      <div style={{ display: "flex", gap: 12, alignItems: "baseline", marginBottom: 4 }}>
+        <span style={{ fontFamily: "monospace", fontSize: 11, color: "#80611A" }}>{token}</span>
+        <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{label}</span>
+      </div>
+      <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, lineHeight: value, color: "#1A1716", maxWidth: 200 }}>
+        Inner space, stillness and reflection.
+      </div>
+    </div>
+  ))}
+</div>
+
+### Letter Spacing Scale
+
+<div style={{ display: "flex", gap: 40, marginTop: 8, marginBottom: 32 }}>
+  {[
+    { token: "tracking-tight", value: "-0.02em" },
+    { token: "tracking-normal", value: "0" },
+    { token: "tracking-wide", value: "0.05em" },
+  ].map(({ token, value }) => (
+    <div key={token} style={{ display: "flex", gap: 16, alignItems: "center" }}>
+      <span style={{ fontFamily: "monospace", fontSize: 11, color: "#80611A" }}>{token}</span>
+      <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{value}</span>
+      <span style={{ fontFamily: "Inter, sans-serif", fontSize: 14, fontWeight: 600, letterSpacing: value, color: "#1A1716", textTransform: "uppercase" }}>TYPOGRAPHY</span>
+    </div>
+  ))}
+</div>
+
+<div style={{ fontSize: 12, color: "#ABA6A0", marginBottom: 40, fontStyle: "italic" }}>
+  * Size scale follows a modular progression. Line heights: tight for headings, relaxed for body text. Letter spacing: tight for large text, wide for small caps/overlines.
+</div>
+
+---
+
+## Type Styles
+
+Named composites — what code actually uses. Each bundles family + size + weight + line-height + letter-spacing + bottom spacing.
+
+<code style={{ fontSize: 13, color: "#80611A", background: "#F0E2C2", padding: "2px 6px", borderRadius: 3 }}>type.display</code>{" "}
+not{" "}
+<code style={{ fontSize: 13, color: "#941A10", background: "#F2D5CF", padding: "2px 6px", borderRadius: 3 }}>fontWeight: 300; fontSize: 40px;</code>
+
+export const TypeStyleRow = ({ name, description, size, weight, leading, tracking, bottom, specimen, specimenColor }) => (
+  <div style={{ display: "grid", gridTemplateColumns: "100px 36px 64px 60px 80px 36px 1fr", gap: 12, alignItems: "center", padding: "12px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <div>
+      <div style={{ fontFamily: "monospace", fontSize: 13, fontWeight: 600, color: "#1A1716" }}>{name}</div>
+      <div style={{ fontSize: 11, color: "#ABA6A0", marginTop: 2 }}>{description}</div>
+    </div>
+    <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{size}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{weight}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{leading}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{tracking}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ABA6A0" }}>{bottom}</span>
+    <div style={{ fontFamily: "Inter, sans-serif", fontSize: Math.min(parseInt(size), 24), fontWeight: weight.includes("300") ? 300 : weight.includes("400") ? 400 : 500, letterSpacing: tracking.includes("tight") ? "-0.02em" : tracking.includes("wide") ? "0.05em" : "0", color: specimenColor || "#1A1716", overflow: "hidden", whiteSpace: "nowrap", textOverflow: "ellipsis" }}>
+      {specimen}
+    </div>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 16 }}>
+  <div style={{ display: "grid", gridTemplateColumns: "100px 36px 64px 60px 80px 36px 1fr", gap: 12, padding: "8px 0", borderBottom: "2px solid #DBD6CD" }}>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#57524D" }}>Style Name</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Size</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Weight</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Line Height</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Letter Spacing</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Bottom ↓</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Specimen</span>
+  </div>
+  <TypeStyleRow name="display" description="Page titles, hero headings" size="40px" weight="light (300)" leading="tight (1.2)" tracking="tight (-0.02em)" bottom="24px" specimen="Your inner world" />
+  <TypeStyleRow name="display-sm" description="Section titles, card headings" size="28px" weight="light (300)" leading="tight (1.2)" tracking="tight (-0.02em)" bottom="20px" specimen="Thinking Tools" />
+  <TypeStyleRow name="subhead" description="Supporting info, secondary headings" size="18px" weight="light (300)" leading="normal (1.4)" tracking="normal (0)" bottom="12px" specimen="Session Overview — fear of conflict" />
+  <TypeStyleRow name="body" description="Paragraphs, descriptions, content" size="14px" weight="regular (400)" leading="relaxed (1.6)" tracking="normal (0)" bottom="12px" specimen="The quiet room at dusk. Inner space for reflection and stillness." />
+  <TypeStyleRow name="meta" description="Timestamps, counts, labels" size="12px" weight="regular (400)" leading="normal (1.4)" tracking="wide (0.05em)" bottom="4px" specimen="3 of 8 sessions · tomorrow · 2 min" />
+  <TypeStyleRow name="accent" description="Buttons, links, interactive labels" size="15px" weight="medium (500)" leading="tight (1.2)" tracking="normal (0)" bottom="8px" specimen="Start Session" specimenColor="#80611A" />
+</div>
+
+<div style={{ background: "#1A1716", borderRadius: 8, padding: 24, marginTop: 24, marginBottom: 32 }}>
+  <div style={{ fontSize: 12, color: "#ABA6A0", marginBottom: 8 }}>On dark surface — same style names, colors swap via semantic palette</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 40, fontWeight: 300, letterSpacing: "-0.02em", lineHeight: 1.2, color: "#F8F5EE", marginBottom: 8 }}>Your inner world</div>
+  <div style={{ fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: 400, lineHeight: 1.6, color: "#ABA6A0" }}>Stillness comes from space and proportion, not from fading things out.</div>
+</div>
+
+---
+
+## Usage
+
+```ts
+import { display, body } from "~/design-system/styles/typography.css";
+
+const PageTitle = ({ children }) => (
+  <h1 className={display}>{children}</h1>
+);
+
+const Paragraph = ({ children }) => (
+  <p className={body}>{children}</p>
+);
+```
+
+Typography tokens are static and do not change between light and dark themes. Only palette colors swap.

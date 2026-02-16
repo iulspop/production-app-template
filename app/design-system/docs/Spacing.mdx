@@ -1,0 +1,221 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design System/Spacing" />
+
+# Spacing & Layout
+
+Spacing scale, layout containers, border radius, and elevation. Base unit: 4px.
+
+---
+
+## Spacing Scale
+
+All spacing derives from a 4px base unit. Use token names, never raw pixel values.
+
+<code style={{ fontSize: 13, color: "#80611A", background: "#F0E2C2", padding: "2px 6px", borderRadius: 3 }}>gap.(space-4)</code>{" "}
+not{" "}
+<code style={{ fontSize: 13, color: "#941A10", background: "#F2D5CF", padding: "2px 6px", borderRadius: 3 }}>gap=(16)</code>
+
+export const SpaceRow = ({ token, value, px, use }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "6px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <span style={{ fontFamily: "monospace", fontSize: 13, color: "#57524D", minWidth: 80 }}>{token}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 36 }}>{value}</span>
+    <div style={{ minWidth: 300, display: "flex", alignItems: "center" }}>
+      <div style={{ width: px, height: 12, background: "#ABA6A0", borderRadius: 2, minWidth: 2 }} />
+    </div>
+    <span style={{ fontSize: 12, color: "#ABA6A0", flex: 1 }}>{use}</span>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 32 }}>
+  <div style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "2px solid #DBD6CD" }}>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 80 }}>Token</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 36 }}>Value</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 300 }}>Visual</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", flex: 1 }}>Common use</span>
+  </div>
+  <SpaceRow token="space-0.5" value="2px" px={2} use="Hairline gaps, icon-to-badge" />
+  <SpaceRow token="space-1" value="4px" px={4} use="Tight inline gaps, icon-to-text" />
+  <SpaceRow token="space-1.5" value="6px" px={6} use="Compact list item padding" />
+  <SpaceRow token="space-2" value="8px" px={8} use="Default inline gap, small padding" />
+  <SpaceRow token="space-3" value="12px" px={12} use="Input padding, compact card padding" />
+  <SpaceRow token="space-4" value="16px" px={16} use="Default padding, card content, stack gap" />
+  <SpaceRow token="space-5" value="20px" px={20} use="Card padding, generous input padding" />
+  <SpaceRow token="space-6" value="24px" px={24} use="Section padding, card-to-card gap" />
+  <SpaceRow token="space-8" value="32px" px={32} use="Section gap, page top/bottom padding" />
+  <SpaceRow token="space-10" value="40px" px={40} use="Large section gap" />
+  <SpaceRow token="space-12" value="48px" px={48} use="Page section dividers" />
+  <SpaceRow token="space-16" value="64px" px={64} use="Hero spacing, major page sections" />
+</div>
+
+---
+
+## Semantic Spacing
+
+Named spacing roles for consistent rhythm. Code uses these, not the raw scale directly.
+
+export const SemanticSection = ({ title, children }) => (
+  <div style={{ marginBottom: 24 }}>
+    <div style={{ fontWeight: 600, fontSize: 13, color: "#57524D", marginBottom: 8 }}>{title}</div>
+    <div>{children}</div>
+  </div>
+);
+
+export const SemanticSpaceRow = ({ name, token, value, use }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "5px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <span style={{ fontFamily: "monospace", fontSize: 13, color: "#80611A", minWidth: 140 }}>{name}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 70 }}>{token}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 40 }}>{value}</span>
+    <span style={{ fontSize: 12, color: "#ABA6A0", flex: 1 }}>{use}</span>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 32 }}>
+  <div style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "2px solid #DBD6CD" }}>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 140 }}>Semantic Name</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 70 }}>Token</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 40 }}>Value</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", flex: 1 }}>Use</span>
+  </div>
+
+  <SemanticSection title="Inline">
+    <SemanticSpaceRow name="gap.inline.xs" token="space-1" value="4px" use="Icon to text" />
+    <SemanticSpaceRow name="gap.inline.sm" token="space-2" value="8px" use="Between related items" />
+    <SemanticSpaceRow name="gap.inline.md" token="space-4" value="16px" use="Between groups" />
+  </SemanticSection>
+
+  <SemanticSection title="Stack">
+    <SemanticSpaceRow name="gap.stack.xs" token="space-2" value="8px" use="Tight content lines" />
+    <SemanticSpaceRow name="gap.stack.sm" token="space-3" value="12px" use="List items, form fields" />
+    <SemanticSpaceRow name="gap.stack.md" token="space-4" value="16px" use="Content blocks" />
+    <SemanticSpaceRow name="gap.stack.lg" token="space-6" value="24px" use="Card groups, section content" />
+    <SemanticSpaceRow name="gap.stack.xl" token="space-8" value="32px" use="Major sections" />
+  </SemanticSection>
+
+  <SemanticSection title="Padding">
+    <SemanticSpaceRow name="padding.card" token="space-5" value="20px" use="Card inner padding" />
+    <SemanticSpaceRow name="padding.section" token="space-6" value="24px" use="Section/container padding" />
+    <SemanticSpaceRow name="padding.page" token="space-8" value="32px" use="Page-level horizontal padding" />
+    <SemanticSpaceRow name="padding.input" token="space-3" value="12px" use="Input field padding" />
+  </SemanticSection>
+
+  <SemanticSection title="Inset">
+    <SemanticSpaceRow name="inset.page.top" token="space-8" value="32px" use="Top of page content" />
+    <SemanticSpaceRow name="inset.page.bottom" token="space-12" value="48px" use="Bottom of page (above nav)" />
+  </SemanticSection>
+</div>
+
+---
+
+## Border Radius
+
+Shell = structured (small radius). Session = warm (large radius). The radius signals which mode you're in.
+
+export const RadiusPreview = ({ token, value, description, use }) => (
+  <div style={{ textAlign: "center" }}>
+    <div style={{ width: 80, height: 80, border: "2px solid #DBD6CD", borderRadius: value, background: "#F8F5EE", margin: "0 auto 8px" }} />
+    <div style={{ fontFamily: "monospace", fontSize: 12, fontWeight: 600, color: "#80611A" }}>{token}</div>
+    <div style={{ fontSize: 11, color: "#57524D" }}>{value}</div>
+    <div style={{ fontSize: 11, color: "#ABA6A0", marginTop: 2 }}>{description}</div>
+    <div style={{ fontSize: 10, color: "#ABA6A0", fontStyle: "italic" }}>{use}</div>
+  </div>
+);
+
+<div style={{ display: "flex", gap: 32, justifyContent: "center", marginTop: 16, marginBottom: 24 }}>
+  <RadiusPreview token="radius.none" value="0" description="Dividers, full-width" use="Both" />
+  <RadiusPreview token="radius.sm" value="4px" description="Badges, tags, chips" use="Both" />
+  <RadiusPreview token="radius.md" value="8px" description="Cards, inputs, buttons" use="Shell" />
+  <RadiusPreview token="radius.lg" value="16px" description="Cards, modals" use="Session" />
+  <RadiusPreview token="radius.xl" value="24px" description="Session cards, panels" use="Session" />
+  <RadiusPreview token="radius.full" value="50%" description="Pills, avatars" use="Both" />
+</div>
+
+<div style={{ display: "flex", gap: 16, alignItems: "center", justifyContent: "center", marginBottom: 32, fontSize: 13, color: "#57524D" }}>
+  <div style={{ border: "2px solid #DBD6CD", borderRadius: 8, padding: "12px 24px" }}>
+    <div style={{ fontWeight: 600, fontSize: 13 }}>Shell Mode</div>
+    <div style={{ fontSize: 11, color: "#ABA6A0" }}>radius.md (8px) — clean, structured</div>
+  </div>
+  <span style={{ color: "#ABA6A0" }}>→</span>
+  <div style={{ border: "2px solid #DBD6CD", borderRadius: 24, padding: "12px 24px" }}>
+    <div style={{ fontWeight: 600, fontSize: 13 }}>Session Mode</div>
+    <div style={{ fontSize: 11, color: "#ABA6A0" }}>radius.xl (24px) — warm, rounded</div>
+  </div>
+</div>
+
+---
+
+## Elevation
+
+Minimal depth — grounded means mostly flat. Elevation for floating UI only.
+
+<div style={{ display: "flex", gap: 32, justifyContent: "center", marginTop: 16, marginBottom: 32 }}>
+  {[
+    { token: "elevation.0", shadow: "none", border: "1px solid #DBD6CD", description: "No shadow (border only)", use: "Cards, containers, inline UI" },
+    { token: "elevation.1", shadow: "0 1px 3px rgba(0,0,0,0.08)", border: "none", description: "0 1px 3px rgba(0,0,0,0.08)", use: "Dropdowns, tooltips" },
+    { token: "elevation.2", shadow: "0 4px 12px rgba(0,0,0,0.12)", border: "none", description: "0 4px 12px rgba(0,0,0,0.12)", use: "Modals, sheets, popovers" },
+  ].map(({ token, shadow, border, description, use }) => (
+    <div key={token} style={{ textAlign: "center" }}>
+      <div style={{ width: 140, height: 100, background: "#FFFFFF", borderRadius: 8, boxShadow: shadow, border, margin: "0 auto 12px" }} />
+      <div style={{ fontFamily: "monospace", fontSize: 12, fontWeight: 600, color: "#80611A" }}>{token}</div>
+      <div style={{ fontSize: 11, color: "#ABA6A0", maxWidth: 180 }}>{description}</div>
+      <div style={{ fontSize: 11, color: "#57524D", marginTop: 2 }}>{use}</div>
+    </div>
+  ))}
+</div>
+
+---
+
+## Layout
+
+Container widths and page structure. Mobile-first, single-column.
+
+export const ContainerRow = ({ name, width, use, pxWidth }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 0", borderBottom: "1px solid #EDE9E0" }}>
+    <span style={{ fontFamily: "monospace", fontSize: 13, color: "#80611A", minWidth: 120 }}>{name}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0", minWidth: 50 }}>{width}</span>
+    <span style={{ fontSize: 12, color: "#ABA6A0", minWidth: 200 }}>{use}</span>
+    <div style={{ flex: 1, display: "flex", alignItems: "center" }}>
+      <div style={{ width: `${pxWidth}%`, height: 12, background: "#ABA6A0", borderRadius: 2, minWidth: 4 }} />
+    </div>
+  </div>
+);
+
+<div style={{ marginTop: 16, marginBottom: 16 }}>
+  <div style={{ display: "flex", gap: 12, padding: "8px 0", borderBottom: "2px solid #DBD6CD" }}>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 120 }}>Container</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 50 }}>Max Width</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", minWidth: 200 }}>Use</span>
+    <span style={{ fontWeight: 600, fontSize: 12, color: "#ABA6A0", flex: 1 }}>Visual</span>
+  </div>
+  <ContainerRow name="container.sm" width="480px" use="Forms, auth, focused content" pxWidth={48} />
+  <ContainerRow name="container.md" width="640px" use="Session screens, card lists" pxWidth={64} />
+  <ContainerRow name="container.lg" width="800px" use="Dashboard, wide content" pxWidth={80} />
+  <ContainerRow name="container.full" width="100%" use="Full-bleed, nav bars" pxWidth={100} />
+</div>
+
+<div style={{ fontSize: 12, color: "#ABA6A0", marginBottom: 32, fontStyle: "italic" }}>
+  Page padding: space-4 (16px) mobile, space-6 (24px) tablet+. Content always centered.
+</div>
+
+---
+
+## Usage
+
+```ts
+import { style } from "@vanilla-extract/css";
+import { padding, borderRadius, elevation, gap } from "~/design-system/tokens/spacing.css";
+
+export const card = style({
+  padding: padding.card,
+  borderRadius: borderRadius.md,
+  boxShadow: elevation[1],
+});
+
+export const list = style({
+  display: "flex",
+  flexDirection: "column",
+  gap: gap.stack.sm,
+});
+```
+
+Spacing tokens are static values and do not change between themes.

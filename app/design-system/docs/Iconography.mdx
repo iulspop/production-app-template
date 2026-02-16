@@ -1,0 +1,249 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+import {
+  House, ArrowLeft, ArrowRight, CaretRight, CaretDown, CaretUp,
+  X, List, MagnifyingGlass, Gear, SignOut, DotsThreeVertical,
+  Play, Pause, Stop, Check, Plus, Minus, PencilSimple, Trash,
+  ShareNetwork, Download, BookmarkSimple, Copy, ArrowClockwise, ArrowsOut,
+  Brain, Lightbulb, Eye, ChatCircle, Notebook, Timer, Calendar, Path,
+  Compass, Target, Spiral, Infinity,
+  Fire, Drop, Tree, Mountains, Diamond,
+  CheckCircle, WarningCircle, Info, XCircle, Clock, Star, Flag, Bell, ShieldCheck, Sparkle,
+  Image, Camera, Microphone, FileText, Folder, Tag, Link, Quotes, TextAa, ListBullets,
+  User, Users, Heart, Smiley, HandWaving, HandHeart, PersonSimpleWalk, PersonArmsSpread,
+  Funnel, SortAscending, SortDescending, Sliders, ToggleLeft, SquaresFour, Rows, Columns, Sidebar,
+} from "@phosphor-icons/react";
+
+<Meta title="Design System/Iconography" />
+
+# Iconography System
+
+Phosphor Icons (UI) + brand mark. Icons inherit color from semantic palette.
+
+---
+
+## Icon Primitives
+
+The raw building blocks for iconography.
+
+### Library
+
+<div style={{ display: "flex", alignItems: "center", gap: 16, padding: 20, border: "1px solid #DBD6CD", borderRadius: 8, marginBottom: 24 }}>
+  <span style={{ fontSize: 20, fontWeight: 600, color: "#1A1716" }}>Phosphor Icons</span>
+  <span style={{ fontSize: 13, color: "#ABA6A0" }}>1,500+ icons · 6 weights · MIT · @phosphor-icons/react</span>
+</div>
+
+### Weight Pairing
+
+Match icon weight to UI context, just like typography.
+
+<div style={{ display: "flex", gap: 16, marginTop: 8, marginBottom: 24 }}>
+  {[
+    { weight: "Light", value: "light", desc: "Shell — nav, headers, passive UI", icon: <Minus size={20} weight="light" /> },
+    { weight: "Regular", value: "regular", desc: "Sessions — active UI, cards, interactive", icon: <Minus size={20} weight="regular" /> },
+    { weight: "Bold", value: "bold", desc: "Emphasis — selected states, primary actions", icon: <Minus size={20} weight="bold" /> },
+    { weight: "Fill", value: "fill", desc: "Active/selected — bottom nav, toggles", icon: <Circle size={20} weight="fill" /> },
+  ].map(({ weight, value, desc, icon }) => (
+    <div key={weight} style={{ flex: 1, padding: 16, border: "1px solid #DBD6CD", borderRadius: 8 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+        <span style={{ fontSize: 14, fontWeight: 600, color: "#80611A" }}>{weight}</span>
+        <span style={{ fontSize: 12, color: "#ABA6A0" }}>weight: {value}</span>
+      </div>
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>{icon}</div>
+      <div style={{ fontSize: 11, color: "#ABA6A0", marginTop: 8 }}>{desc}</div>
+    </div>
+  ))}
+</div>
+
+export const Circle = ({ size, weight }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20">
+    <circle cx="10" cy="10" r="6" fill="#1A1716" />
+  </svg>
+);
+
+### Size Scale
+
+<div style={{ display: "flex", gap: 40, marginTop: 8, marginBottom: 24 }}>
+  {[
+    { token: "icon-xs", size: 16, desc: "Inline with body text, meta" },
+    { token: "icon-sm", size: 20, desc: "Buttons, nav items, lists" },
+    { token: "icon-md", size: 24, desc: "Card headers, section markers" },
+    { token: "icon-lg", size: 32, desc: "Feature highlights, empty states" },
+  ].map(({ token, size, desc }) => (
+    <div key={token} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+      <div style={{ width: 48, height: 48, display: "flex", alignItems: "center", justifyContent: "center", background: "#F8F5EE", borderRadius: 8 }}>
+        <House size={size} weight="regular" color="#1A1716" />
+      </div>
+      <div>
+        <div style={{ fontFamily: "monospace", fontSize: 12, fontWeight: 600, color: "#80611A" }}>{token}</div>
+        <div style={{ fontSize: 11, color: "#ABA6A0" }}>{size}px</div>
+        <div style={{ fontSize: 11, color: "#ABA6A0" }}>{desc}</div>
+      </div>
+    </div>
+  ))}
+</div>
+
+### Color Rules
+
+<div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8, marginBottom: 32 }}>
+  {[
+    { dot: "#1A1716", rule: "UI icons inherit text color", tokens: "text.primary, text.secondary" },
+    { dot: "#941A10", rule: "Element icons use accent color", tokens: "accent.fire.text, accent.water.text" },
+    { dot: "#80611A", rule: "Interactive icons follow interactive", tokens: "interactive.primary" },
+    { dot: "#57524D", rule: "Disabled icons use tertiary", tokens: "text.tertiary" },
+  ].map(({ dot, rule, tokens }) => (
+    <div key={rule} style={{ display: "flex", alignItems: "center", gap: 12, padding: "6px 0" }}>
+      <div style={{ width: 12, height: 12, borderRadius: "50%", background: dot, flexShrink: 0 }} />
+      <span style={{ fontSize: 14, color: "#1A1716", fontWeight: 500, minWidth: 280 }}>{rule}</span>
+      <span style={{ fontSize: 12, color: "#ABA6A0", fontFamily: "monospace" }}>{tokens}</span>
+    </div>
+  ))}
+</div>
+
+---
+
+## Curated Icon Set
+
+~80 icons organized by function. Swap placeholders with Phosphor instances from the library. Use Light weight for shell, Regular for sessions.
+
+export const IconGrid = ({ title, count, icons }) => (
+  <div style={{ marginBottom: 24 }}>
+    <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 12 }}>
+      <span style={{ fontSize: 14, fontWeight: 600, color: "#1A1716" }}>{title}</span>
+      <span style={{ fontSize: 11, color: "#ABA6A0" }}>{count} icons</span>
+    </div>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+      {icons.map(({ icon: Icon, name }) => (
+        <div key={name} style={{ width: 72, height: 72, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4 }}>
+          <Icon size={24} weight="light" color="#1A1716" />
+          <span style={{ fontSize: 9, color: "#ABA6A0", textAlign: "center" }}>{name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+<IconGrid title="Navigation" count="12 icons" icons={[
+  { icon: House, name: "house" },
+  { icon: ArrowLeft, name: "arrow-left" },
+  { icon: ArrowRight, name: "arrow-right" },
+  { icon: CaretRight, name: "caret-right" },
+  { icon: CaretDown, name: "caret-down" },
+  { icon: CaretUp, name: "caret-up" },
+  { icon: X, name: "x" },
+  { icon: List, name: "list" },
+  { icon: MagnifyingGlass, name: "magnifying-glass" },
+  { icon: Gear, name: "gear" },
+  { icon: SignOut, name: "sign-out" },
+  { icon: DotsThreeVertical, name: "dots-three-vertical" },
+]} />
+
+<IconGrid title="Actions" count="14 icons" icons={[
+  { icon: Play, name: "play" },
+  { icon: Pause, name: "pause" },
+  { icon: Stop, name: "stop" },
+  { icon: Check, name: "check" },
+  { icon: Plus, name: "plus" },
+  { icon: Minus, name: "minus" },
+  { icon: PencilSimple, name: "pencil-simple" },
+  { icon: Trash, name: "trash" },
+  { icon: ShareNetwork, name: "share" },
+  { icon: Download, name: "download" },
+  { icon: BookmarkSimple, name: "bookmark-simple" },
+  { icon: Copy, name: "copy" },
+  { icon: ArrowClockwise, name: "arrow-clockwise" },
+  { icon: ArrowsOut, name: "arrows-out" },
+]} />
+
+<IconGrid title="Session & Thinking" count="12 icons" icons={[
+  { icon: Brain, name: "brain" },
+  { icon: Lightbulb, name: "lightbulb" },
+  { icon: Eye, name: "eye" },
+  { icon: ChatCircle, name: "chat-circle" },
+  { icon: Notebook, name: "notebook" },
+  { icon: Timer, name: "timer" },
+  { icon: Calendar, name: "calendar" },
+  { icon: Path, name: "path" },
+  { icon: Compass, name: "compass" },
+  { icon: Target, name: "target" },
+  { icon: Spiral, name: "spiral" },
+  { icon: Infinity, name: "infinity" },
+]} />
+
+<IconGrid title="Elements" count="5 icons" icons={[
+  { icon: Fire, name: "fire" },
+  { icon: Drop, name: "drop" },
+  { icon: Tree, name: "tree" },
+  { icon: Mountains, name: "mountains" },
+  { icon: Diamond, name: "diamond" },
+]} />
+
+<IconGrid title="Status & Feedback" count="10 icons" icons={[
+  { icon: CheckCircle, name: "check-circle" },
+  { icon: WarningCircle, name: "warning-circle" },
+  { icon: Info, name: "info" },
+  { icon: XCircle, name: "x-circle" },
+  { icon: Clock, name: "clock" },
+  { icon: Star, name: "star" },
+  { icon: Flag, name: "flag" },
+  { icon: Bell, name: "bell" },
+  { icon: ShieldCheck, name: "shield-check" },
+  { icon: Sparkle, name: "sparkle" },
+]} />
+
+<IconGrid title="Content" count="10 icons" icons={[
+  { icon: Image, name: "image" },
+  { icon: Camera, name: "camera" },
+  { icon: Microphone, name: "microphone" },
+  { icon: FileText, name: "file-text" },
+  { icon: Folder, name: "folder" },
+  { icon: Tag, name: "tag" },
+  { icon: Link, name: "link" },
+  { icon: Quotes, name: "quotes" },
+  { icon: TextAa, name: "text-aa" },
+  { icon: ListBullets, name: "list-bullets" },
+]} />
+
+<IconGrid title="People & Emotion" count="8 icons" icons={[
+  { icon: User, name: "user" },
+  { icon: Users, name: "users" },
+  { icon: Heart, name: "heart" },
+  { icon: Smiley, name: "smiley" },
+  { icon: HandWaving, name: "hand-waving" },
+  { icon: HandHeart, name: "hand-heart" },
+  { icon: PersonSimpleWalk, name: "person-simple-walk" },
+  { icon: PersonArmsSpread, name: "person-arms-spread" },
+]} />
+
+<IconGrid title="UI Controls" count="8 icons" icons={[
+  { icon: Funnel, name: "funnel" },
+  { icon: SortAscending, name: "sort-ascending" },
+  { icon: SortDescending, name: "sort-descending" },
+  { icon: Sliders, name: "sliders" },
+  { icon: ToggleLeft, name: "toggle-left" },
+  { icon: SquaresFour, name: "squares-four" },
+  { icon: Rows, name: "rows" },
+  { icon: Columns, name: "columns" },
+]} />
+
+<div style={{ fontSize: 12, color: "#ABA6A0", marginBottom: 32, fontStyle: "italic" }}>
+  * Swap placeholders with Phosphor instances from the library. Use Light weight for shell, Regular for sessions. All icons at 24x24 default.
+</div>
+
+---
+
+## Usage
+
+```tsx
+import { Brain, Fire } from "@phosphor-icons/react";
+
+// UI icon — inherits text color
+<Brain size={20} weight="light" />
+
+// Element icon — uses accent color
+<Fire size={24} weight="regular" color="var(--accent-fire-text)" />
+
+// Interactive icon
+<Brain size={20} weight="regular" color="var(--interactive-primary)" />
+```
+
+Phosphor icons are verbs (actions, navigation, status). Use Light weight for shell UI, Regular for session/active UI, Bold for emphasis, Fill for selected states.

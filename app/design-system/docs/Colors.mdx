@@ -1,0 +1,179 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Design System/Colors" />
+
+# Color System
+
+Design tokens → semantic palette → themes. Code uses palette names, never raw colors.
+
+export const Swatch = ({ color, label, hex }) => (
+  <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+    <div style={{ width: 24, height: 24, borderRadius: 4, background: hex, border: "1px solid rgba(0,0,0,0.08)", flexShrink: 0 }} />
+    <span style={{ fontFamily: "monospace", fontSize: 13, color: "#57524D", minWidth: 100 }}>{label}</span>
+    <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0" }}>{hex}</span>
+  </div>
+);
+
+export const PaletteGroup = ({ title, subtitle, swatches }) => (
+  <div style={{ minWidth: 180 }}>
+    <div style={{ fontSize: 14, fontWeight: 600, color: "#1A1716", marginBottom: 2 }}>{title}</div>
+    {subtitle && <div style={{ fontSize: 11, color: "#ABA6A0", marginBottom: 8 }}>{subtitle}</div>}
+    <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      {swatches.map(s => <Swatch key={s.label} {...s} />)}
+    </div>
+  </div>
+);
+
+## Color Tokens
+
+Raw named colors. The source of truth. Every color in the system is defined here once.
+
+<div style={{ display: "flex", flexWrap: "wrap", gap: 40, marginTop: 16, marginBottom: 32 }}>
+  <PaletteGroup title="Neutral" swatches={[
+    { label: "neutral-50", hex: "#F8F5EE" },
+    { label: "neutral-100", hex: "#EDE9E0" },
+    { label: "neutral-200", hex: "#DBD6CD" },
+    { label: "neutral-300", hex: "#ABA6A0" },
+    { label: "neutral-400", hex: "#8C8580" },
+    { label: "neutral-500", hex: "#57524D" },
+    { label: "neutral-600", hex: "#38352F" },
+    { label: "neutral-700", hex: "#1A1716" },
+    { label: "neutral-900", hex: "#0D0C0A" },
+  ]} />
+  <PaletteGroup title="Ember (Fire)" swatches={[
+    { label: "ember-100", hex: "#F2D5CF" },
+    { label: "ember-300", hex: "#D2614D" },
+    { label: "ember-500", hex: "#941A10" },
+    { label: "ember-700", hex: "#F28566" },
+  ]} />
+  <PaletteGroup title="Pool (Water)" swatches={[
+    { label: "pool-100", hex: "#CDDCED" },
+    { label: "pool-300", hex: "#5285B3" },
+    { label: "pool-500", hex: "#1F5280" },
+    { label: "pool-700", hex: "#80B8EB" },
+  ]} />
+  <PaletteGroup title="Stone (Metal)" swatches={[
+    { label: "stone-100", hex: "#E0DEE3" },
+    { label: "stone-300", hex: "#99949E" },
+    { label: "stone-500", hex: "#524D57" },
+    { label: "stone-700", hex: "#C7C2CC" },
+  ]} />
+  <PaletteGroup title="Ochre (Earth)" swatches={[
+    { label: "ochre-100", hex: "#F0E2C2" },
+    { label: "ochre-300", hex: "#D2A852" },
+    { label: "ochre-500", hex: "#80611A" },
+    { label: "ochre-700", hex: "#F2C761" },
+  ]} />
+  <PaletteGroup title="Sage (Wood)" swatches={[
+    { label: "sage-100", hex: "#D0E5D4" },
+    { label: "sage-300", hex: "#6BA37A" },
+    { label: "sage-500", hex: "#2E6638" },
+    { label: "sage-700", hex: "#8DD199" },
+  ]} />
+  <PaletteGroup title="Special" swatches={[
+    { label: "gold", hex: "#EBC859" },
+    { label: "white", hex: "#FFFFFF" },
+  ]} />
+</div>
+
+<div style={{ fontSize: 12, color: "#ABA6A0", marginBottom: 40, fontStyle: "italic" }}>
+  * 100 = subtle bg tint · 300 = decorative/tint accent · 500 = text on light (AAA) · 700 = text on dark (AAA)
+</div>
+
+---
+
+## Semantic Palette
+
+Functional role names. Code only uses these. Never a raw token directly.
+
+<code style={{ fontSize: 13, color: "#80611A", background: "#F0E2C2", padding: "2px 6px", borderRadius: 3 }}>palette.text.primary</code>{" "}
+not{" "}
+<code style={{ fontSize: 13, color: "#941A10", background: "#F2D5CF", padding: "2px 6px", borderRadius: 3 }}>neutral-700</code>
+
+export const SemanticRow = ({ name, tokenRef, hex, darkHex, darkTokenRef }) => (
+  <tr>
+    <td style={{ padding: "6px 12px", display: "flex", alignItems: "center", gap: 8 }}>
+      <div style={{ width: 16, height: 16, borderRadius: 3, background: hex, border: "1px solid rgba(0,0,0,0.1)", flexShrink: 0 }} />
+      <span style={{ fontFamily: "monospace", fontSize: 13 }}>{name}</span>
+    </td>
+    <td style={{ padding: "6px 12px", fontFamily: "monospace", fontSize: 12, color: "#ABA6A0" }}>{tokenRef}</td>
+    <td style={{ padding: "6px 12px", fontFamily: "monospace", fontSize: 12, color: "#ABA6A0" }}>{hex}</td>
+    <td style={{ padding: "6px 12px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <div style={{ width: 16, height: 16, borderRadius: 3, background: darkHex, border: "1px solid rgba(255,255,255,0.1)", flexShrink: 0 }} />
+        <span style={{ fontFamily: "monospace", fontSize: 12, color: "#ABA6A0" }}>{darkTokenRef}</span>
+      </div>
+    </td>
+    <td style={{ padding: "6px 12px", fontFamily: "monospace", fontSize: 12, color: "#ABA6A0" }}>{darkHex}</td>
+  </tr>
+);
+
+export const SectionLabel = ({ children }) => (
+  <tr><td colSpan={5} style={{ padding: "14px 12px 4px", fontWeight: 600, fontSize: 13, color: "#57524D", borderBottom: "none" }}>{children}</td></tr>
+);
+
+<div style={{ marginTop: 24, overflowX: "auto" }}>
+  <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
+    <thead>
+      <tr style={{ borderBottom: "2px solid #DBD6CD" }}>
+        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 200 }}>Light Theme</th>
+        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Token Reference</th>
+        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Value</th>
+        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: 600, fontSize: 12, color: "#57524D", minWidth: 200 }}>Dark Theme</th>
+        <th style={{ padding: "8px 12px", textAlign: "left", fontWeight: 600, fontSize: 12, color: "#ABA6A0" }}>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <SectionLabel>Surface</SectionLabel>
+      <SemanticRow name="surface.primary" tokenRef="neutral-50" hex="#F8F5EE" darkTokenRef="neutral-900" darkHex="#0D0C0A" />
+      <SemanticRow name="surface.secondary" tokenRef="white" hex="#FFFFFF" darkTokenRef="neutral-700" darkHex="#1A1716" />
+      <SemanticRow name="surface.tertiary" tokenRef="neutral-100" hex="#EDE9E0" darkTokenRef="neutral-600" darkHex="#38352F" />
+      <SemanticRow name="surface.inverse" tokenRef="neutral-700" hex="#1A1716" darkTokenRef="neutral-50" darkHex="#F8F5EE" />
+      <SectionLabel>Text</SectionLabel>
+      <SemanticRow name="text.primary" tokenRef="neutral-700" hex="#1A1716" darkTokenRef="neutral-50" darkHex="#F8F5EE" />
+      <SemanticRow name="text.secondary" tokenRef="neutral-600" hex="#38352F" darkTokenRef="neutral-200" darkHex="#DBD6CD" />
+      <SemanticRow name="text.tertiary" tokenRef="neutral-500" hex="#57524D" darkTokenRef="neutral-300" darkHex="#ABA6A0" />
+      <SemanticRow name="text.inverse" tokenRef="neutral-50" hex="#F8F5EE" darkTokenRef="neutral-700" darkHex="#1A1716" />
+      <SectionLabel>Border</SectionLabel>
+      <SemanticRow name="border.default" tokenRef="neutral-200" hex="#DBD6CD" darkTokenRef="neutral-600" darkHex="#38352F" />
+      <SemanticRow name="border.subtle" tokenRef="neutral-100" hex="#EDE9E0" darkTokenRef="neutral-700" darkHex="#1A1716" />
+      <SectionLabel>Interactive</SectionLabel>
+      <SemanticRow name="interactive.primary" tokenRef="ochre-500" hex="#80611A" darkTokenRef="ochre-700" darkHex="#F2C761" />
+      <SemanticRow name="interactive.subtle" tokenRef="ochre-300" hex="#D2A852" darkTokenRef="ochre-300" darkHex="#D2A852" />
+      <SectionLabel>Accent — Fire</SectionLabel>
+      <SemanticRow name="accent.fire.text" tokenRef="ember-500" hex="#941A10" darkTokenRef="ember-700" darkHex="#F28566" />
+      <SemanticRow name="accent.fire.tint" tokenRef="ember-300" hex="#D2614D" darkTokenRef="ember-300" darkHex="#D2614D" />
+      <SemanticRow name="accent.fire.subtle" tokenRef="ember-100" hex="#F2D5CF" darkTokenRef="ember-500" darkHex="#941A10" />
+      <SectionLabel>Accent — Water</SectionLabel>
+      <SemanticRow name="accent.water.text" tokenRef="pool-500" hex="#1F5280" darkTokenRef="pool-700" darkHex="#80B8EB" />
+      <SemanticRow name="accent.water.tint" tokenRef="pool-300" hex="#5285B3" darkTokenRef="pool-300" darkHex="#5285B3" />
+      <SectionLabel>Accent — Earth</SectionLabel>
+      <SemanticRow name="accent.earth.text" tokenRef="ochre-500" hex="#80611A" darkTokenRef="ochre-700" darkHex="#F2C761" />
+      <SemanticRow name="accent.earth.tint" tokenRef="ochre-300" hex="#D2A852" darkTokenRef="ochre-300" darkHex="#D2A852" />
+      <SectionLabel>Accent — Metal</SectionLabel>
+      <SemanticRow name="accent.metal.text" tokenRef="stone-500" hex="#524D57" darkTokenRef="stone-700" darkHex="#C7C2CC" />
+      <SemanticRow name="accent.metal.tint" tokenRef="stone-300" hex="#99949E" darkTokenRef="stone-300" darkHex="#99949E" />
+      <SectionLabel>Accent — Wood</SectionLabel>
+      <SemanticRow name="accent.wood.text" tokenRef="sage-500" hex="#2E6638" darkTokenRef="sage-700" darkHex="#8DD199" />
+      <SemanticRow name="accent.wood.tint" tokenRef="sage-300" hex="#6BA37A" darkTokenRef="sage-300" darkHex="#6BA37A" />
+      <SemanticRow name="accent.wood.subtle" tokenRef="sage-100" hex="#D0E5D4" darkTokenRef="sage-500" darkHex="#2E6638" />
+    </tbody>
+  </table>
+</div>
+
+---
+
+## Usage
+
+```ts
+import { themeVars } from "~/design-system/tokens/colors.css";
+import { style } from "@vanilla-extract/css";
+
+export const card = style({
+  background: themeVars.surface.secondary,
+  color: themeVars.text.primary,
+  border: `1px solid ${themeVars.border.default}`,
+});
+```
+
+Colors switch automatically based on the presence of the `.dark` class on an ancestor element.
