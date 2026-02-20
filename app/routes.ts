@@ -8,5 +8,6 @@ export default [
   route("onboarding", "routes/onboarding.tsx"),
   route("auth/callback", "routes/auth.callback.tsx"),
   route("logout", "routes/logout.tsx"),
+  route("api/clerk-webhook", "routes/api.clerk-webhook.tsx"),
   route("healthcheck", "routes/healthcheck.tsx"),
 ] satisfies RouteConfig;

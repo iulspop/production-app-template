@@ -30,3 +30,29 @@ export async function retrieveUserFromDatabaseById(id: User["id"]) {
 export async function retrieveUserFromDatabaseByEmail(email: User["email"]) {
   return prisma.user.findUnique({ where: { email } });
 }
+
+/**
+ * Retrieves a user by their Clerk ID.
+ *
+ * @param clerkId The Clerk-issued user ID.
+ * @returns The user or null.
+ */
+export async function retrieveUserFromDatabaseByClerkId(
+  clerkId: NonNullable<User["clerkId"]>,
+) {
+  return prisma.user.findUnique({ where: { clerkId } });
+}
+
+/**
+ * Updates a user in the database by their Clerk ID.
+ *
+ * @param clerkId The Clerk-issued user ID.
+ * @param data The fields to update.
+ * @returns The updated user.
+ */
+export async function updateUserInDatabaseByClerkId(
+  clerkId: NonNullable<User["clerkId"]>,
+  data: Pick<Prisma.UserUpdateInput, "email" | "name">,
+) {
+  return prisma.user.update({ data, where: { clerkId } });
+}

@@ -1,25 +1,20 @@
-import { Form } from "react-router";
+import type { FormEventHandler } from "react";
 
-import { SEND_MAGIC_LINK_INTENT } from "../domain/auth-constants";
 import { Button } from "~/components/ui/button";
 import { FieldError } from "~/components/ui/field-error";
 import { Input } from "~/components/ui/input";
-import type { UserValidationError } from "~/features/users/domain/users-domain";
-import {
-  isUserValidationError,
-  userValidationErrorToMessage,
-} from "~/features/users/domain/users-domain";
 
-type LoginPageActionData =
-  | { error: string; success: false }
-  | { error: null; success: true }
-  | undefined;
+type LoginPageComponentProps = {
+  error: string | null;
+  isPending: boolean;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+};
 
 export function LoginPageComponent({
-  actionData,
-}: {
-  actionData?: LoginPageActionData;
-}) {
+  error,
+  isPending,
+  onSubmit,
+}: LoginPageComponentProps) {
   return (
     <main className="mx-auto max-w-md px-4 py-16">
       <h1 className="mb-2 text-3xl font-bold text-foreground">Welcome back</h1>
@@ -27,7 +22,7 @@ export function LoginPageComponent({
         Enter your email to sign in or create an account.
       </p>
 
-      <Form className="space-y-4" method="post">
+      <form className="space-y-4" onSubmit={onSubmit}>
         <div>
           <Input
             autoComplete="email"
@@ -36,24 +31,11 @@ export function LoginPageComponent({
             type="email"
           />
         </div>
-        <Button
-          className="w-full"
-          name="intent"
-          type="submit"
-          value={SEND_MAGIC_LINK_INTENT}
-        >
-          Continue with email
+        <Button className="w-full" disabled={isPending} type="submit">
+          {isPending ? "Sending code..." : "Continue with email"}
         </Button>
-        {actionData?.success === false && (
-          <FieldError>
-            {isUserValidationError(actionData.error)
-              ? userValidationErrorToMessage(
-                  actionData.error as UserValidationError,
-                )
-              : actionData.error}
-          </FieldError>
-        )}
-      </Form>
+        {error && <FieldError>{error}</FieldError>}
+      </form>
     </main>
   );
 }

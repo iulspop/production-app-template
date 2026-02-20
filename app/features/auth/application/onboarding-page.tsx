@@ -1,27 +1,20 @@
-import { Form } from "react-router";
+import type { FormEventHandler } from "react";
 
-import { ONBOARD_INTENT } from "../domain/auth-constants";
 import { Button } from "~/components/ui/button";
 import { FieldError } from "~/components/ui/field-error";
 import { Input } from "~/components/ui/input";
-import type { UserValidationError } from "~/features/users/domain/users-domain";
-import {
-  isUserValidationError,
-  userValidationErrorToMessage,
-} from "~/features/users/domain/users-domain";
 
-type OnboardingPageActionData =
-  | { error: string; success: false }
-  | { error: null; success: true }
-  | undefined;
+type OnboardingPageComponentProps = {
+  error: string | null;
+  isPending: boolean;
+  onSubmit: FormEventHandler<HTMLFormElement>;
+};
 
 export function OnboardingPageComponent({
-  actionData,
-  email,
-}: {
-  actionData?: OnboardingPageActionData;
-  email: string;
-}) {
+  error,
+  isPending,
+  onSubmit,
+}: OnboardingPageComponentProps) {
   return (
     <main className="mx-auto max-w-md px-4 py-16">
       <h1 className="mb-2 text-3xl font-bold text-foreground">
@@ -29,8 +22,7 @@ export function OnboardingPageComponent({
       </h1>
       <p className="mb-8 text-muted-foreground">What should we call you?</p>
 
-      <Form className="space-y-4" method="post">
-        <input name="email" type="hidden" value={email} />
+      <form className="space-y-4" onSubmit={onSubmit}>
         <div>
           <Input
             autoComplete="name"
@@ -39,24 +31,11 @@ export function OnboardingPageComponent({
             type="text"
           />
         </div>
-        <Button
-          className="w-full"
-          name="intent"
-          type="submit"
-          value={ONBOARD_INTENT}
-        >
-          Get started
+        <Button className="w-full" disabled={isPending} type="submit">
+          {isPending ? "Setting up..." : "Get started"}
         </Button>
-        {actionData?.success === false && (
-          <FieldError>
-            {isUserValidationError(actionData.error)
-              ? userValidationErrorToMessage(
-                  actionData.error as UserValidationError,
-                )
-              : actionData.error}
-          </FieldError>
-        )}
-      </Form>
+        {error && <FieldError>{error}</FieldError>}
+      </form>
     </main>
   );
 }
