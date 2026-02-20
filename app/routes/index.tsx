@@ -1,4 +1,4 @@
-import type { Route } from "./+types/home";
+import type { Route } from "./+types/index";
 import { useHints } from "~/utils/client-hints";
 
 export function loader() {

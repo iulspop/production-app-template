@@ -1,13 +1,3 @@
-import type { RouteConfig } from "@react-router/dev/routes";
-import { index, route } from "@react-router/dev/routes";
+import { autoRoutes } from "react-router-auto-routes";
 
-export default [
-  index("routes/home.tsx"),
-  route("login", "routes/login.tsx"),
-  route("verify", "routes/verify.tsx"),
-  route("onboarding", "routes/onboarding.tsx"),
-  route("auth/callback", "routes/auth.callback.tsx"),
-  route("logout", "routes/logout.tsx"),
-  route("api/clerk-webhook", "routes/api.clerk-webhook.tsx"),
-  route("healthcheck", "routes/healthcheck.tsx"),
-] satisfies RouteConfig;
+export default autoRoutes();

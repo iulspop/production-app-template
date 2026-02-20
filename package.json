@@ -50,6 +50,7 @@
     "happy-dom": "^20.6.1",
     "lefthook": "^2.1.1",
     "prisma": "^7.4.0",
+    "react-router-auto-routes": "^0.8.2",
     "remark-gfm": "^4.0.1",
     "storybook": "^10.2.8",
     "tailwindcss": "^4.1.18",
