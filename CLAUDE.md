@@ -35,22 +35,62 @@ Act as a top-tier software engineer with serious JavaScript/TypeScript disciplin
 
 ## Testing
 
-Develop **test-driven** (TDD): write a failing test first, then the minimal implementation to pass it, then refactor.
+**TDD is mandatory. No exceptions.** Every change follows Red-Green-Refactor:
+1. **Red** — Write a failing test FIRST. Run it. Confirm it fails.
+2. **Green** — Write the minimum code to make the test pass. Run it. Confirm it passes.
+3. **Refactor** — Clean up while keeping tests green.
 
-TestKinds {
-  Every new function, component, or behavior must have at least one of these four test kinds:
-  1. Unit tests (`*.test.ts`) — Pure functions. Colocated with the code under test.
-  2. Render tests (`*.test.tsx`) — Components. Colocated with the component (often alongside the route).
-  3. Integration tests (`*.spec.ts`) — Infrastructure facades. When needed.
-  4. E2E tests (`*.e2e.ts`) — Full user flows via Playwright. Colocated in `e2e/`.
-  Lean towards e2e test coverage. Prefer an e2e test over lower-level tests when the behavior is best verified through the real UI and full stack.
-  Use lower-level tests when: pure logic is complex enough to warrant isolated unit tests, or e2e would be too slow/fragile for the feedback loop.
+Never write implementation code without a failing test already in place. If you catch yourself writing code first, stop, delete it, and write the test.
+
+TestLayers {
+  1. **Unit tests** (`*.test.ts`) — Pure domain functions. Colocated with the code under test.
+     When: domain logic, transformations, validators, any pure function.
+     TDD: Write the test with expected inputs/outputs → create the function → pass the test.
+
+  2. **Render tests** (`*.test.tsx`) — React components. Colocated with the component.
+     When: display components, conditional rendering, user interactions, form behavior.
+     TDD: Write a render test asserting expected output → create the component → pass the test.
+
+  3. **Integration tests** (`*.spec.ts`) — Infrastructure facades and server actions.
+     When: database operations, action handlers, multi-layer interactions.
+     TDD: Write a test calling the facade/action with expected DB state → implement → pass.
+
+  4. **E2E tests** (`*.e2e.ts`) — Full user flows via Playwright. Colocated in `e2e/`.
+     When: user-facing features, form submissions, navigation, auth flows.
+     TDD: Write the Playwright test describing the user journey → build the feature → pass.
+}
+
+TestCoverage {
+  Every change needs the right COMBINATION of test layers, not just one. Think about what you're changing and cover it at every relevant layer.
+
+  **New feature** (e.g. add user invitation flow):
+  - E2E test: new test covering the full user journey (send invite → accept → verify)
+  - Unit tests: new tests for domain logic (validation, permission checks, token generation)
+  - Integration test: new test for the database facade (save/retrieve invite)
+  - Render test: new test for any display component with conditional logic
+
+  **Extend existing feature** (e.g. add role selection to invitation flow):
+  - E2E test: extend existing e2e test with the new step, or add a new case
+  - Unit tests: new tests for new domain logic (role validation, role-based permissions)
+  - Integration test: only if new DB operations were added
+  - Render test: only if new component behavior was added
+
+  **Bug fix** (e.g. invitation email not sent for certain roles):
+  - E2E test: add a case reproducing the bug, then fix it
+  - Unit test: add a case for the edge case in the domain function, then fix it
+
+  **Refactor** (e.g. extract shared validation logic):
+  - Existing tests should keep passing. If they don't, fix the code not the tests.
+  - Add unit tests for newly extracted functions.
 }
 
 TestConstraints {
   Test names follow the pattern: `given: <precondition>, should: <expected behavior>`.
   Use factories (`*-factories.server.ts`) to build test data — never hardcode full objects inline.
   Run e2e tests one at a time: `npx playwright test <path-to-single-test-file>`. Never run the full e2e suite in bulk during development.
+  Use Vitest with describe, expect, and test for unit/render/integration tests.
+  Capture `actual` and `expected` values in variables before asserting with `toEqual`.
+  Avoid `expect.any(Constructor)` in assertions. Expect specific values instead.
 }
 
 ## JavaScript / TypeScript
