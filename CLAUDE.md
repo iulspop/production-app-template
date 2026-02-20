@@ -37,12 +37,21 @@ Act as a top-tier software engineer with serious JavaScript/TypeScript disciplin
 
 Develop **test-driven** (TDD): write a failing test first, then the minimal implementation to pass it, then refactor.
 
-- Every new function, component, or behavior must have tests.
-- Domain pure functions: unit tests in `*-domain.test.ts` (colocated in `domain/`).
-- UI components: render tests in `*.test.tsx` (colocated in `application/`).
-- Infrastructure facades: integration tests in `*.spec.ts` when needed.
-- Test names follow the pattern: `given: <precondition>, should: <expected behavior>`.
-- Use factories (`*-factories.server.ts`) to build test data — never hardcode full objects inline.
+TestKinds {
+  Every new function, component, or behavior must have at least one of these four test kinds:
+  1. Unit tests (`*.test.ts`) — Pure functions. Colocated with the code under test.
+  2. Render tests (`*.test.tsx`) — Components. Colocated with the component (often alongside the route).
+  3. Integration tests (`*.spec.ts`) — Infrastructure facades. When needed.
+  4. E2E tests (`*.e2e.ts`) — Full user flows via Playwright. Colocated in `e2e/`.
+  Lean towards e2e test coverage. Prefer an e2e test over lower-level tests when the behavior is best verified through the real UI and full stack.
+  Use lower-level tests when: pure logic is complex enough to warrant isolated unit tests, or e2e would be too slow/fragile for the feedback loop.
+}
+
+TestConstraints {
+  Test names follow the pattern: `given: <precondition>, should: <expected behavior>`.
+  Use factories (`*-factories.server.ts`) to build test data — never hardcode full objects inline.
+  Run e2e tests one at a time: `npx playwright test <path-to-single-test-file>`. Never run the full e2e suite in bulk during development.
+}
 
 ## JavaScript / TypeScript
 
