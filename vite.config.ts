@@ -2,6 +2,7 @@ import { reactRouter } from "@react-router/dev/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { defineConfig } from "vite";
+import devtoolsJson from "vite-plugin-devtools-json";
 import tsconfigPaths from "vite-tsconfig-paths";
 import { defineConfig as defineVitestConfig } from "vitest/config";
 
@@ -9,6 +10,7 @@ const isTestOrStorybook = process.env.VITEST || process.env.STORYBOOK;
 
 const rootConfig = defineConfig({
   plugins: [
+    devtoolsJson(),
     vanillaExtractPlugin(),
     tailwindcss(),
     !isTestOrStorybook && reactRouter(),
