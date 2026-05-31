@@ -1,4 +1,4 @@
-import { ClerkProvider, UserButton } from "@clerk/react-router";
+import { ClerkProvider, SignedIn, UserButton } from "@clerk/react-router";
 import { rootAuthLoader } from "@clerk/react-router/ssr.server";
 import {
   data,
@@ -65,17 +65,19 @@ function AppContent({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <header className="flex items-center justify-end p-4">
-        {loaderData.userId ? (
-          loaderData.isClerkEnabled ? (
+        {loaderData.isClerkEnabled ? (
+          <SignedIn>
             <UserButton />
-          ) : (
+          </SignedIn>
+        ) : (
+          loaderData.userId && (
             <Form action="/logout" method="post">
               <Button size="sm" type="submit" variant="ghost">
                 Log out
               </Button>
             </Form>
           )
-        ) : null}
+        )}
       </header>
       <Outlet />
     </>

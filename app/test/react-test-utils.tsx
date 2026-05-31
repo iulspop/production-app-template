@@ -8,7 +8,6 @@ const customRender = (
 ) => render(ui, { ...options });
 
 export * from "@testing-library/react";
+export { customRender as render };
 export { default as userEvent } from "@testing-library/user-event";
 export { createRoutesStub } from "react-router";
-
-export { customRender as render };
