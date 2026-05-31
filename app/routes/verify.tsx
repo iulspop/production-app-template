@@ -1,4 +1,4 @@
-import { useSignIn, useSignUp } from "@clerk/react-router";
+import { useSignIn, useSignUp } from "@clerk/react-router/legacy";
 import { useState } from "react";
 import { useNavigate, useSubmit } from "react-router";
 

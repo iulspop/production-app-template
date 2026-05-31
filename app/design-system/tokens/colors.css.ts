@@ -178,4 +178,4 @@ createGlobalTheme(".dark", colorContract, {
   },
 });
 
-export { palette, colorContract as themeVars };
+export { colorContract as themeVars, palette };
