@@ -1,4 +1,5 @@
-import type { Prisma, Session } from "../../../../generated/prisma/client";
+import type { Prisma, Session } from "../../../../../generated/prisma/client";
+import type { SessionsRepositoryPort } from "../ports/sessions-repository";
 import { prisma } from "~/utils/db.server";
 
 /**
@@ -37,3 +38,9 @@ export async function retrieveSessionWithUserFromDatabaseById(
 export async function deleteSessionFromDatabaseById(id: Session["id"]) {
   return prisma.session.delete({ where: { id } });
 }
+
+export const sessionsRepositoryAdapter: SessionsRepositoryPort = {
+  deleteById: deleteSessionFromDatabaseById,
+  retrieveWithUserById: retrieveSessionWithUserFromDatabaseById,
+  save: saveSessionToDatabase,
+};

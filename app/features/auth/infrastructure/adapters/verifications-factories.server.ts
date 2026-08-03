@@ -1,7 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { createId } from "@paralleldrive/cuid2";
 
-import type { Verification } from "../../../../generated/prisma/client";
+import type { Verification } from "../../../../../generated/prisma/client";
+import type { VerificationsFactoryPort } from "../ports/verifications-factory";
 import type { Factory } from "~/utils/types";
 
 /**
@@ -33,3 +34,7 @@ export const createPopulatedVerification: Factory<Verification> = ({
   target,
   type,
 });
+
+export const verificationsFactoryAdapter: VerificationsFactoryPort = {
+  create: createPopulatedVerification,
+};

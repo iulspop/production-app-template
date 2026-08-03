@@ -1,14 +1,14 @@
 import type { FormEventHandler } from "react";
 
-import { Button } from "~/components/ui/button";
-import { FieldError } from "~/components/ui/field-error";
-import { Input } from "~/components/ui/input";
-
-type OnboardingPageComponentProps = {
+export type OnboardingPageComponentProps = {
   error: string | null;
   isPending: boolean;
   onSubmit: FormEventHandler<HTMLFormElement>;
 };
+
+import { Button } from "~/components/ui/button";
+import { FieldError } from "~/components/ui/field-error";
+import { Input } from "~/components/ui/input";
 
 export function OnboardingPageComponent({
   error,

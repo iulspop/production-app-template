@@ -1,14 +1,14 @@
 import { redirect } from "react-router";
 
 import type { Route } from "./+types/auth.callback";
-import { createUserSession } from "~/features/auth/application/auth-session.server";
+import { createUserSession } from "~/features/auth/application/adapters/auth-session.server";
 import { isSessionExpired } from "~/features/auth/domain/auth-domain";
-import { verifyVerificationTOTP } from "~/features/auth/infrastructure/totp.server";
+import { verifyVerificationTOTP } from "~/features/auth/infrastructure/adapters/totp.server";
 import {
   deleteVerificationFromDatabaseByTypeAndTarget,
   retrieveVerificationFromDatabaseByTypeAndTarget,
-} from "~/features/auth/infrastructure/verifications-model.server";
-import { retrieveUserFromDatabaseByEmail } from "~/features/users/infrastructure/users-model.server";
+} from "~/features/auth/infrastructure/adapters/verifications-model.server";
+import { retrieveUserFromDatabaseByEmail } from "~/features/users/infrastructure/adapters/users-model.server";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);

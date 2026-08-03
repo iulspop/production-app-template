@@ -19,7 +19,7 @@ import {
   authMiddleware,
   getUserIdFromContext,
   isClerkEnabled,
-} from "./features/auth/application/auth-middleware.server";
+} from "./features/auth/application/adapters/auth-middleware.server";
 import { ClientHintCheck, getHints } from "./utils/client-hints";
 
 export const middleware = [authMiddleware];

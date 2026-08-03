@@ -4,7 +4,8 @@ import {
   ONBOARD_INTENT,
   SEND_MAGIC_LINK_INTENT,
   VERIFY_CODE_INTENT,
-} from "../domain/auth-constants";
+} from "../../domain/auth-constants";
+import type { AuthSchemasPort } from "../ports/auth-schemas";
 
 export const sendMagicLinkSchema = z.object({
   email: z.string().trim().min(1, { message: "Email is required." }),
@@ -34,3 +35,5 @@ export type AuthActionSchema = z.infer<typeof authActionSchema>;
 export type OnboardSchema = z.infer<typeof onboardSchema>;
 export type SendMagicLinkSchema = z.infer<typeof sendMagicLinkSchema>;
 export type VerifyCodeSchema = z.infer<typeof verifyCodeSchema>;
+
+export const authSchemasAdapter: AuthSchemasPort = authActionSchema;

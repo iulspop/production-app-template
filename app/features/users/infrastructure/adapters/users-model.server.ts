@@ -1,4 +1,5 @@
-import type { Prisma, User } from "../../../../generated/prisma/client";
+import type { Prisma, User } from "../../../../../generated/prisma/client";
+import type { UsersRepositoryPort } from "../ports/users-repository";
 import { prisma } from "~/utils/db.server";
 
 /**
@@ -56,3 +57,11 @@ export async function updateUserInDatabaseByClerkId(
 ) {
   return prisma.user.update({ data, where: { clerkId } });
 }
+
+export const usersRepositoryAdapter: UsersRepositoryPort = {
+  retrieveByClerkId: retrieveUserFromDatabaseByClerkId,
+  retrieveByEmail: retrieveUserFromDatabaseByEmail,
+  retrieveById: retrieveUserFromDatabaseById,
+  save: saveUserToDatabase,
+  updateByClerkId: updateUserInDatabaseByClerkId,
+};

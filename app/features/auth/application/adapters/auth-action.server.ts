@@ -7,22 +7,23 @@ import {
   VERIFICATION_EXPIRY_MINUTES,
   VERIFICATION_TYPE_LOGIN,
   VERIFY_CODE_INTENT,
-} from "../domain/auth-constants";
+} from "../../domain/auth-constants";
 import {
   buildMagicLinkUrl,
   computeVerificationExpiry,
   isSessionExpired,
-} from "../domain/auth-domain";
-import { sendMagicLinkEmail } from "../infrastructure/email.server";
+} from "../../domain/auth-domain";
+import { sendMagicLinkEmail } from "../../infrastructure/adapters/email.server";
 import {
   generateVerificationTOTP,
   verifyVerificationTOTP,
-} from "../infrastructure/totp.server";
+} from "../../infrastructure/adapters/totp.server";
 import {
   deleteVerificationFromDatabaseByTypeAndTarget,
   retrieveVerificationFromDatabaseByTypeAndTarget,
   saveVerificationToDatabase,
-} from "../infrastructure/verifications-model.server";
+} from "../../infrastructure/adapters/verifications-model.server";
+import type { AuthActionPort } from "../ports/auth-action";
 import { authActionSchema } from "./auth-schemas";
 import { createUserSession } from "./auth-session.server";
 import {
@@ -32,7 +33,7 @@ import {
 import {
   retrieveUserFromDatabaseByEmail,
   saveUserToDatabase,
-} from "~/features/users/infrastructure/users-model.server";
+} from "~/features/users/infrastructure/adapters/users-model.server";
 
 export const authAction = async ({ request }: { request: Request }) => {
   const formData = await request.formData();
@@ -175,3 +176,5 @@ export const authAction = async ({ request }: { request: Request }) => {
     })
     .exhaustive();
 };
+
+export const authActionAdapter: AuthActionPort = { handle: authAction };

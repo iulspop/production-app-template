@@ -1,8 +1,8 @@
 import { redirect } from "react-router";
 
 import type { Route } from "./+types/logout";
-import { isClerkEnabled } from "~/features/auth/application/auth-middleware.server";
-import { destroyUserSession } from "~/features/auth/application/auth-session.server";
+import { isClerkEnabled } from "~/features/auth/application/adapters/auth-middleware.server";
+import { destroyUserSession } from "~/features/auth/application/adapters/auth-session.server";
 
 export async function loader() {
   return redirect("/");

@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useNavigate, useSubmit } from "react-router";
 
 import type { Route } from "./+types/verify";
-import { authAction } from "~/features/auth/application/auth-action.server";
+import { authAction } from "~/features/auth/application/adapters/auth-action.server";
 import {
   getUserIdFromContext,
   isClerkEnabled,
-} from "~/features/auth/application/auth-middleware.server";
-import { extractClerkError } from "~/features/auth/application/clerk-error";
-import { VerifyPageComponent } from "~/features/auth/application/verify-page";
+} from "~/features/auth/application/adapters/auth-middleware.server";
+import { extractClerkError } from "~/features/auth/application/adapters/clerk-error";
+import { VerifyPageComponent } from "~/features/auth/application/adapters/verify-page";
 import { VERIFY_CODE_INTENT } from "~/features/auth/domain/auth-constants";
 
 export const meta: Route.MetaFunction = () => [{ title: "Verify" }];

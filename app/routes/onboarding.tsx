@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useNavigate, useSubmit } from "react-router";
 
 import type { Route } from "./+types/onboarding";
-import { authAction } from "~/features/auth/application/auth-action.server";
+import { authAction } from "~/features/auth/application/adapters/auth-action.server";
 import {
   getUserIdFromContext,
   isClerkEnabled,
-} from "~/features/auth/application/auth-middleware.server";
-import { extractClerkError } from "~/features/auth/application/clerk-error";
-import { OnboardingPageComponent } from "~/features/auth/application/onboarding-page";
+} from "~/features/auth/application/adapters/auth-middleware.server";
+import { extractClerkError } from "~/features/auth/application/adapters/clerk-error";
+import { OnboardingPageComponent } from "~/features/auth/application/adapters/onboarding-page";
 import { ONBOARD_INTENT } from "~/features/auth/domain/auth-constants";
 import type { UserValidationError } from "~/features/users/domain/users-domain";
 import {

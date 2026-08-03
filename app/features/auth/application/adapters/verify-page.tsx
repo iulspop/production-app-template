@@ -1,15 +1,15 @@
 import type { FormEventHandler } from "react";
 
-import { Button } from "~/components/ui/button";
-import { FieldError } from "~/components/ui/field-error";
-import { Input } from "~/components/ui/input";
-
-type VerifyPageComponentProps = {
+export type VerifyPageComponentProps = {
   error: string | null;
   isPending: boolean;
   onSubmit: FormEventHandler<HTMLFormElement>;
   target: string;
 };
+
+import { Button } from "~/components/ui/button";
+import { FieldError } from "~/components/ui/field-error";
+import { Input } from "~/components/ui/input";
 
 export function VerifyPageComponent({
   error,

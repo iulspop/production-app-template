@@ -5,7 +5,7 @@ import {
   retrieveUserFromDatabaseByClerkId,
   saveUserToDatabase,
   updateUserInDatabaseByClerkId,
-} from "~/features/users/infrastructure/users-model.server";
+} from "~/features/users/infrastructure/adapters/users-model.server";
 
 type ClerkUserEvent = {
   data: {

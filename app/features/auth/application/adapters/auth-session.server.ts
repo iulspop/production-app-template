@@ -1,12 +1,16 @@
 import { createCookieSessionStorage, redirect } from "react-router";
 
-import { SESSION_EXPIRY_DAYS } from "../domain/auth-constants";
-import { computeSessionExpiry, isSessionExpired } from "../domain/auth-domain";
+import { SESSION_EXPIRY_DAYS } from "../../domain/auth-constants";
+import {
+  computeSessionExpiry,
+  isSessionExpired,
+} from "../../domain/auth-domain";
 import {
   deleteSessionFromDatabaseById,
   retrieveSessionWithUserFromDatabaseById,
   saveSessionToDatabase,
-} from "../infrastructure/sessions-model.server";
+} from "../../infrastructure/adapters/sessions-model.server";
+import type { AuthSessionPort } from "../ports/auth-session";
 
 const SESSION_KEY = "sessionId";
 
@@ -95,4 +99,12 @@ export const destroyUserSession = async (request: Request): Promise<string> => {
     request.headers.get("Cookie"),
   );
   return sessionStorage.destroySession(cookieSession);
+};
+
+export const authSessionAdapter: AuthSessionPort = {
+  create: createUserSession,
+  destroy: destroyUserSession,
+  getUserId,
+  requireAnonymous,
+  requireUserId,
 };

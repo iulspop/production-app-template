@@ -2,8 +2,9 @@ import { getAuth } from "@clerk/react-router/ssr.server";
 import type { MiddlewareFunction, RouterContextProvider } from "react-router";
 import { createContext } from "react-router";
 
+import type { AuthMiddlewarePort } from "../ports/auth-middleware";
 import { getUserId } from "./auth-session.server";
-import { retrieveUserFromDatabaseByClerkId } from "~/features/users/infrastructure/users-model.server";
+import { retrieveUserFromDatabaseByClerkId } from "~/features/users/infrastructure/adapters/users-model.server";
 
 const authUserIdContext = createContext<string | null>();
 
@@ -40,3 +41,9 @@ export const authMiddleware: MiddlewareFunction = async (args, next) => {
 export const getUserIdFromContext = (
   context: Readonly<RouterContextProvider>,
 ): string | null => context.get(authUserIdContext) ?? null;
+
+export const authMiddlewareAdapter: AuthMiddlewarePort = {
+  getUserId: getUserIdFromContext,
+  handle: authMiddleware,
+  isClerkEnabled,
+};

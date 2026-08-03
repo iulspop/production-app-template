@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useNavigate, useSubmit } from "react-router";
 
 import type { Route } from "./+types/login";
-import { authAction } from "~/features/auth/application/auth-action.server";
+import { authAction } from "~/features/auth/application/adapters/auth-action.server";
 import {
   getUserIdFromContext,
   isClerkEnabled,
-} from "~/features/auth/application/auth-middleware.server";
-import { extractClerkError } from "~/features/auth/application/clerk-error";
-import { LoginPageComponent } from "~/features/auth/application/login-page";
+} from "~/features/auth/application/adapters/auth-middleware.server";
+import { extractClerkError } from "~/features/auth/application/adapters/clerk-error";
+import { LoginPageComponent } from "~/features/auth/application/adapters/login-page";
 import { SEND_MAGIC_LINK_INTENT } from "~/features/auth/domain/auth-constants";
 import type { UserValidationError } from "~/features/users/domain/users-domain";
 import {

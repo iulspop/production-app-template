@@ -5,7 +5,8 @@ import {
   TOTP_CHAR_SET,
   TOTP_DIGITS,
   TOTP_PERIOD,
-} from "../domain/auth-constants";
+} from "../../domain/auth-constants";
+import type { TotpPort, VerificationTOTP } from "../ports/totp";
 
 /**
  * Generates a TOTP with the project's standard configuration.
@@ -33,14 +34,7 @@ export const verifyVerificationTOTP = ({
   otp,
   period,
   secret,
-}: {
-  algorithm: string;
-  charSet: string;
-  digits: number;
-  otp: string;
-  period: number;
-  secret: string;
-}) =>
+}: VerificationTOTP) =>
   verifyTOTP({
     algorithm,
     charSet,
@@ -49,3 +43,8 @@ export const verifyVerificationTOTP = ({
     period,
     secret,
   });
+
+export const totpAdapter: TotpPort = {
+  generate: generateVerificationTOTP,
+  verify: verifyVerificationTOTP,
+};

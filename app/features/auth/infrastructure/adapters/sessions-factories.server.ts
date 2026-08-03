@@ -1,7 +1,8 @@
 import { faker } from "@faker-js/faker";
 import { createId } from "@paralleldrive/cuid2";
 
-import type { Session } from "../../../../generated/prisma/client";
+import type { Session } from "../../../../../generated/prisma/client";
+import type { SessionsFactoryPort } from "../ports/sessions-factory";
 import type { Factory } from "~/utils/types";
 
 /**
@@ -23,3 +24,7 @@ export const createPopulatedSession: Factory<Session> = ({
   updatedAt,
   userId,
 });
+
+export const sessionsFactoryAdapter: SessionsFactoryPort = {
+  create: createPopulatedSession,
+};

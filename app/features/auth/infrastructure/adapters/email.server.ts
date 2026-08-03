@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 
+import type { EmailPort, MagicLinkEmail } from "../ports/email";
+
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null;
@@ -14,11 +16,7 @@ export async function sendMagicLinkEmail({
   code,
   email,
   magicLinkUrl,
-}: {
-  code: string;
-  email: string;
-  magicLinkUrl: string;
-}) {
+}: MagicLinkEmail) {
   if (!resend) {
     console.log(`[Auth] Magic link for ${email}:`);
     console.log(`  Code: ${code}`);
@@ -33,3 +31,5 @@ export async function sendMagicLinkEmail({
     to: email,
   });
 }
+
+export const emailAdapter: EmailPort = { sendMagicLink: sendMagicLinkEmail };

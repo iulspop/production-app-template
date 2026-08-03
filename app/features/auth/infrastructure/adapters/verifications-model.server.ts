@@ -1,4 +1,5 @@
-import type { Prisma } from "../../../../generated/prisma/client";
+import type { Prisma } from "../../../../../generated/prisma/client";
+import type { VerificationsRepositoryPort } from "../ports/verifications-repository";
 import { prisma } from "~/utils/db.server";
 
 /**
@@ -57,3 +58,9 @@ export async function deleteVerificationFromDatabaseByTypeAndTarget({
     where: { type_target: { target, type } },
   });
 }
+
+export const verificationsRepositoryAdapter: VerificationsRepositoryPort = {
+  deleteByTypeAndTarget: deleteVerificationFromDatabaseByTypeAndTarget,
+  retrieveByTypeAndTarget: retrieveVerificationFromDatabaseByTypeAndTarget,
+  save: saveVerificationToDatabase,
+};
