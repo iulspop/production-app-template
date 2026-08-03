@@ -1,5 +1,3 @@
-import { ClerkProvider, SignedIn, UserButton } from "@clerk/react-router";
-import { rootAuthLoader } from "@clerk/react-router/ssr.server";
 import {
   data,
   Form,
@@ -18,28 +16,16 @@ import { Button } from "./components/ui/button";
 import {
   authMiddleware,
   getUserIdFromContext,
-  isClerkEnabled,
 } from "./features/auth/application/adapters/auth-middleware.server";
 import { ClientHintCheck, getHints } from "./utils/client-hints";
 
 export const middleware = [authMiddleware];
 
-export async function loader(args: Route.LoaderArgs) {
-  const userId = getUserIdFromContext(args.context);
-  const baseData = {
-    isClerkEnabled: isClerkEnabled(),
-    requestInfo: { hints: getHints(args.request) },
-    userId,
-  };
-
-  if (isClerkEnabled()) {
-    return rootAuthLoader(args as never, () => baseData, {
-      publishableKey: process.env.CLERK_PUBLISHABLE_KEY,
-      secretKey: process.env.CLERK_SECRET_KEY,
-    });
-  }
-
-  return data(baseData);
+export async function loader({ context, request }: Route.LoaderArgs) {
+  return data({
+    requestInfo: { hints: getHints(request) },
+    userId: getUserIdFromContext(context),
+  });
 }
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -61,39 +47,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
-function AppContent({ loaderData }: Route.ComponentProps) {
+export default function App({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <header className="flex items-center justify-end p-4">
-        {loaderData.isClerkEnabled ? (
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        ) : (
-          loaderData.userId && (
-            <Form action="/logout" method="post">
-              <Button size="sm" type="submit" variant="ghost">
-                Log out
-              </Button>
-            </Form>
-          )
+        {loaderData.userId && (
+          <Form action="/logout" method="post">
+            <Button size="sm" type="submit" variant="ghost">
+              Log out
+            </Button>
+          </Form>
         )}
       </header>
       <Outlet />
     </>
   );
-}
-
-export default function App(props: Route.ComponentProps) {
-  if (props.loaderData.isClerkEnabled) {
-    return (
-      <ClerkProvider loaderData={props.loaderData}>
-        <AppContent {...props} />
-      </ClerkProvider>
-    );
-  }
-
-  return <AppContent {...props} />;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
